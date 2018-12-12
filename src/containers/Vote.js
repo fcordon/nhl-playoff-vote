@@ -9,7 +9,7 @@ import { getTeams } from "../actions/TeamsAction"
 
 // Components
 import nhlLogo from '../images/nhl.svg'
-import { VoteTable } from '../components/VoteTable'
+import { VoteForm } from '../components/VoteForm'
 
 class Vote extends Component {
 
@@ -25,11 +25,11 @@ class Vote extends Component {
                 <Col xs={12}>
                     <Panel>
                         <Panel.Heading>
-                            <Panel.Title componentClass="h2"><img class='nhl-logo' src={nhlLogo} alt='NHL Logo' /> Teams</Panel.Title>
+                            <Panel.Title componentClass="h2"><img className='nhl-logo' src={nhlLogo} alt='NHL Logo' /> Teams</Panel.Title>
                         </Panel.Heading>
                         <Panel.Body>
-                            <Form inline>
-                                {this.props.teams.map((teams) => <VoteTable key={teams.id} {...teams} />)}
+                            <Form>
+                                {this.props.teams.map((teams) => <VoteForm key={teams.id} {...teams} />)}
                             </Form>
                         </Panel.Body>
                     </Panel>

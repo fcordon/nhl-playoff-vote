@@ -2,3 +2,11 @@
     width: 5vw;
     margin-right: 30px;
 }
+
+#vote-form .teams-logo {
+    width: 5vw;
+}
+
+#vote-form .form-checkbox {
+    float: left;
+}
