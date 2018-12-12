@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
 // CSS import
-import './index.css'
+import './style/index.css'
 
 // Component import
 import App from './App'
