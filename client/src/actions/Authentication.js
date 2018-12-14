@@ -28,7 +28,7 @@ export const loginUser = (user, history) => dispatch => {
     dispatch(setCurrentUser(decoded));
     localStorage.setItem('userID', decoded.id);
     localStorage.setItem('userPseudo', decoded.pseudo);
-    history.push('/choosePerso')
+    history.push('/vote')
   })
   .catch(err => {
     dispatch({type: GET_ERRORS, payload: err});
@@ -59,8 +59,6 @@ export const logoutUser = () => dispatch => {
   localStorage.removeItem('jwtToken');
   localStorage.removeItem('userID');
   localStorage.removeItem('userPseudo');
-  localStorage.removeItem('userPerso');
-  localStorage.removeItem('userPersoID');
   setAuthToken(false);
   dispatch(setCurrentUser({}));
   window.location.assign("/");
