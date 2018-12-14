@@ -19,7 +19,8 @@ class Vote extends Component {
         this.props.getTeams()
 
         this.state = {
-            'teamsSelected': []
+            'teamsSelected': [],
+            'errors': ''
         }
     }
 
@@ -36,13 +37,23 @@ class Vote extends Component {
         }
 
         this.setState({
-            'teamsSelected': teamsArray
+            'teamsSelected': teamsArray,
+            'errors': ''
         })
     }
 
     onFormSubmit(e) {
         e.preventDefault()
-        console.log('Teams selected : ', this.state.teamsSelected)
+        let teamsLength = this.state.teamsSelected.length
+
+        if(teamsLength < 16) {
+            let teamsDiff = 16 - teamsLength
+            this.setState({
+                'errors': 'Il te manque ' + teamsDiff + ' équipe(s)'
+            })
+        } else {
+
+        }
     }
 
     render() {
@@ -73,8 +84,9 @@ class Vote extends Component {
                                         </FormGroup>
                                     </Col>
                                 )}
-                                <Col xs={7} xsOffset={5}>
+                                <Col xs={12} className='align-center'>
                                     <Button type="submit">Submit</Button>
+                                    {this.state.errors !== '' && (<div className="invalid-feedback">{this.state.errors}</div>)}
                                 </Col>
                             </Form>
                         </Panel.Body>

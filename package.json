@@ -1,42 +1,26 @@
 {
-  "name": "nhl-playoff-vote",
-  "version": "0.1.0",
+  "name": "warhammer2",
+  "version": "0.0.0",
   "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "start-dev": "concurrently \"nodemon\" \"cd client & npm start\""
+  },
   "dependencies": {
     "axios": "^0.18.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "debug": "^4.1.0",
     "express": "^4.16.4",
+    "http-proxy": "^1.17.0",
     "jsonwebtoken": "^8.4.0",
-    "mongoose": "^5.3.15",
+    "mongoose": "^5.3.16",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.8",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
-    "react": "^16.6.3",
-    "react-bootstrap": "^0.32.4",
-    "react-dom": "^16.6.3",
-    "react-redux": "^6.0.0",
-    "react-router": "^4.3.1",
-    "react-router-bootstrap": "^0.24.4",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.1",
-    "redux": "^4.0.1",
-    "redux-devtools-extension": "^2.13.7",
-    "redux-logger": "^3.0.6",
-    "redux-promise-middleware": "^5.1.1",
-    "redux-thunk": "^2.3.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+    "serve-favicon": "^2.5.0",
+    "validator": "^10.9.0"
+  }
 }
