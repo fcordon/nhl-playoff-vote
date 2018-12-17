@@ -1,15 +1,15 @@
-import React, { Component }  from 'react';
-import { Nav, Navbar, NavItem } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { Component }  from 'react'
+import { Nav, Navbar, NavItem } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-import { logoutUser } from './actions/Authentication';
+import { logoutUser } from './actions/Authentication'
 
 class FullNavbars extends Component {
 
     constructor(props) {
-        super(props);
+        super(props)
 
         let token = false
 
@@ -23,7 +23,7 @@ class FullNavbars extends Component {
     }
 
     onLogout() {
-        this.props.logoutUser();
+        this.props.logoutUser()
     }
 
     render() {

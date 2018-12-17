@@ -9,7 +9,6 @@ import { getTeams } from "../actions/TeamsAction"
 
 // Components
 import nhlLogo from '../images/nhl.svg'
-// import { VoteForm } from '../components/VoteForm'
 
 class Vote extends Component {
 
@@ -97,16 +96,16 @@ class Vote extends Component {
     }
 }
 
-    const mapStateToProps = state => {
-        return {
-            teams: state.teams.teams
-        }
+const mapStateToProps = state => {
+    return {
+        teams: state.teams.teams
     }
+}
 
-    const mapDispatchToProps = dispatch => {
-        return bindActionCreators({
-            getTeams
-        }, dispatch);
-    }
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators({
+        getTeams
+    }, dispatch);
+}
 
-    export default connect(mapStateToProps, mapDispatchToProps)(Vote);
+export default connect(mapStateToProps, mapDispatchToProps)(Vote);

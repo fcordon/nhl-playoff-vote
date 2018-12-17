@@ -57,9 +57,6 @@ router.put('/user/:_id', function(req, res) {
   let newData = req.body;
   let query = req.params._id;
 
-  console.log('query : ', query)
-  console.log('newData : ', newData)
-
   let update = {
     '$set': {
       nom: newData.nom,
