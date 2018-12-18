@@ -30,10 +30,10 @@ class FullNavbars extends Component {
         const authNav = (
             <Navbar.Collapse>
                 <Nav>
-                    <LinkContainer to={"/personnage"}>
+                    <LinkContainer to={"/vote"}>
                         <NavItem eventKey={0}>Vote !</NavItem>
                     </LinkContainer>
-                    <LinkContainer to={"/personnage"}>
+                    <LinkContainer to={"/classement"}>
                         <NavItem eventKey={1}>Classement</NavItem>
                     </LinkContainer>
                 </Nav>

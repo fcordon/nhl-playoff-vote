@@ -5,7 +5,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 // Actions
-import { getTeams } from "../actions/TeamsAction"
+import { getTeams } from '../actions/TeamsAction'
+import { postVote } from '../actions/VoteAction'
 
 // Components
 import nhlLogo from '../images/nhl.svg'
@@ -50,8 +51,19 @@ class Vote extends Component {
             this.setState({
                 'errors': 'Il te manque ' + teamsDiff + ' équipe(s)'
             })
+        } else if(teamsLength > 16) {
+            let teamsDiff = teamsLength - 16
+            this.setState({
+                'errors': 'Tu as sélectionné ' + teamsDiff + ' équipe(s) en trop'
+            })
         } else {
+            let vote = {
+                'userID': localStorage.getItem('userID'),
+                'userPseudo': localStorage.getItem('userPseudo'),
+                'teams': this.state.teamsSelected
+            }
 
+            this.props.postVote(vote)
         }
     }
 
@@ -69,11 +81,11 @@ class Vote extends Component {
                                     <Col xs={6} md={4} lg={3} key={i}>
                                         <FormGroup>
                                             <label>
-                                                <img className='teams-logo' src={teams.franchise.teamName !== 'Golden Knights' ? 'https://www.nhl.com/site-core/images/team/logo/current/' + teams.id + '_dark.svg' : 'https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/54.svg'} alt={teams.name} />
+                                                <img className='teams-logo' src={teams.img} alt={teams.name} />
                                                 {teams.name}
                                                 <Checkbox
                                                     className='form-checkbox'
-                                                    id={teams.id}
+                                                    id={teams._id}
                                                     title={teams.name}
                                                     name={teams.name}
                                                     onChange={this.onTeamChange.bind(this)}
@@ -104,7 +116,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return bindActionCreators({
-        getTeams
+        getTeams,
+        postVote
     }, dispatch);
 }
 
