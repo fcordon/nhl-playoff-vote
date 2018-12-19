@@ -2,6 +2,10 @@
     text-align: center;
 }
 
+ul li {
+    list-style-type: none;
+}
+
 .signup-to-signin {
     padding: 0;
     margin-top: 10px;
@@ -13,7 +17,7 @@
     margin-right: 30px;
 }
 
-#vote-form .teams-logo {
+.teams-logo {
     width: 5vw;
 }
 

@@ -55,6 +55,18 @@ app.post('/vote', function(req, res) {
     })
 });
 
+//---->>>> GET VOTE <<<<----
+app.get('/vote/:id', function(req, res) {
+    let userID = req.params.id
+
+    Vote.find({userID: userID}, function(err, votes) {
+        if(err) {
+            throw err;
+        }
+        res.json(votes);
+    })
+});
+
 // END API
 
 // catch 404 and forward to error handler

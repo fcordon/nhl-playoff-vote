@@ -6,7 +6,7 @@ import { findDOMNode } from 'react-dom'
 
 import { updateUser, logoutUser } from '../actions/Authentication'
 
-export class ChangeUser extends Component {
+class ChangeUser extends Component {
 
   constructor(props) {
     super(props);
@@ -36,7 +36,7 @@ export class ChangeUser extends Component {
 
   render() {
     return (
-      <Col xs={6} md={4}>
+      <Col xs={6} xsOffset={3}>
         <Panel>
           <Panel.Heading>
             <Panel.Title componentClass="h2">Modifie tes informations de compte</Panel.Title>

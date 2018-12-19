@@ -25,14 +25,14 @@ class Vote extends Component {
     }
 
     onTeamChange(e) {
-        const name = e.target.name
+        const teamId = e.target.id
         const checked = e.target.checked
         let teamsArray = [...this.state.teamsSelected]
 
         if(checked)
-            teamsArray.push(name)
+            teamsArray.push(teamId)
         else {
-            let teamIndex = teamsArray.indexOf(name)
+            let teamIndex = teamsArray.indexOf(teamId)
             teamIndex !== -1 && teamsArray.splice(teamIndex, 1)
         }
 
@@ -86,7 +86,6 @@ class Vote extends Component {
                                                 <Checkbox
                                                     className='form-checkbox'
                                                     id={teams._id}
-                                                    title={teams.name}
                                                     name={teams.name}
                                                     onChange={this.onTeamChange.bind(this)}
                                                     value={teams.name}
