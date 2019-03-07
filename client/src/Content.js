@@ -1,10 +1,10 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React from 'react'
+import { Switch, Route } from 'react-router-dom'
 
-import Signup from "./components/Signup";
-import Signin from "./components/Signin";
-import Vote from "./components/Vote";
-import MonCompte from "./components/MonCompte";
+import Signup from "./components/Signup"
+import Signin from "./components/Signin"
+import Vote from "./components/Vote"
+import MonCompte from "./components/MonCompte"
 
 const Main = () => (
     <main>
@@ -15,6 +15,6 @@ const Main = () => (
             <Route path='/monCompte' component={MonCompte}/>
         </Switch>
     </main>
-);
+)
 
-export default Main;
+export default Main
