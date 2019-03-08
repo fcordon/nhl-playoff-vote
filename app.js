@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-const url = 'mongodb://Razza:CaptainElan2696@cluster0-shard-00-00-zxexs.mongodb.net:27017,cluster0-shard-00-01-zxexs.mongodb.net:27017,cluster0-shard-00-02-zxexs.mongodb.net:27017/nhl?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true';
+const url = 'mongodb+srv://Razza:CaptainElan2696@cluster0-zxexs.mongodb.net/nhl?retryWrites=true';
 
 async function main() {
   const client = mongoose.connect(url, { useNewUrlParser: true });
@@ -66,7 +66,7 @@ app.use('/', users);
 
 //---->>>> GET TEAMS <<<<----
 app.get('/teams', function(req, res) {
-  Teams.find(function(err, team) {
+  Teams.find({}, function(err, team) {
     if(err) {
       throw err;
     }
@@ -111,7 +111,7 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : console.log(err);
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
   res.status(err.status || 500);
