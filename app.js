@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-const url = 'mongodb://Razza:CaptainElan2696@cluster0-shard-00-00-zxexs.mongodb.net:27017,cluster0-shard-00-01-zxexs.mongodb.net:27017,cluster0-shard-00-02-zxexs.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true';
+const url = 'mongodb://Razza:CaptainElan2696@cluster0-shard-00-00-zxexs.mongodb.net:27017,cluster0-shard-00-01-zxexs.mongodb.net:27017,cluster0-shard-00-02-zxexs.mongodb.net:27017/nhl?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true';
 
 async function main() {
   const client = mongoose.connect(url, { useNewUrlParser: true });
