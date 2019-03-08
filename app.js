@@ -42,23 +42,23 @@ async function main() {
   }
 }
 
-// const MongoClient = require('mongodb').MongoClient;
-// const url = 'mongodb+srv://Razza:CaptainElan2696@cluster0-zxexs.mongodb.net/nhl?retryWrites=true';
-//
-// async function main() {
-//   const client = new MongoClient(url, { useNewUrlParser: true });
-//
-//   try {
-//     await client.connect();
-//     console.log('Connection established to MongoDB !');
-//     await client.close();
-//   } catch (err) {
-//     console.dir(err);
-//   }
-// }
+async function runTransactionWithRetry(txnFunc, client, session) {
+  try {
+    await txnFunc(client, session);
+  } catch (error) {
+    console.log('Transaction aborted. Caught exception during transaction.');
+
+    // If transient error, retry the whole transaction
+    if (error.errorLabels && error.errorLabels.indexOf('TransientTransactionError') >= 0) {
+      console.log('TransientTransactionError, retrying transaction ...');
+      await runTransactionWithRetry(txnFunc, client, session);
+    } else {
+      throw error;
+    }
+  }
+}
 
 main().catch(console.dir);
-
 
 app.use(passport.initialize());
 require('./passport')(passport);
