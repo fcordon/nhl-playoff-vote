@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start-dev": "node ./bin/www",
-    "start": "concurrently \"nodemon\" \"cd client & npm start\""
+    "start": "concurrently \"node ./bin/www\" \"cd client & npm start\""
   },
   "dependencies": {
     "axios": "^0.18.0",
