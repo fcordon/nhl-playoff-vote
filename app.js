@@ -18,12 +18,12 @@ const users = require('./routes/user');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-app.use(favicon(path.join(__dirname, './client/public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, '/client/public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, './client/build')));
+app.use(express.static(path.join(__dirname, '/client/build')));
 
 // API
 const mongoose = require('mongoose');
@@ -64,9 +64,9 @@ app.use(passport.initialize());
 require('./passport')(passport);
 app.use('/', users);
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + './client/build/index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname + '/client/build/index.html'));
+// });
 
 //---->>>> GET TEAMS <<<<----
 app.get('/teams', function(req, res) {
