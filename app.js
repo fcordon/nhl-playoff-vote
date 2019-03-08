@@ -28,9 +28,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 // API
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://Razza:CaptainElan2696@cluster0-shard-00-00-zxexs.mongodb.net:27017,cluster0-shard-00-01-zxexs.mongodb.net:27017,cluster0-shard-00-02-zxexs.mongodb.net:27017/nhl?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true', { useNewUrlParser: true }).then(
+// mongoose.connect('mongodb://Razza:CaptainElan2696@cluster0-shard-00-00-zxexs.mongodb.net:27017,cluster0-shard-00-01-zxexs.mongodb.net:27017,cluster0-shard-00-02-zxexs.mongodb.net:27017/nhl?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true', { useNewUrlParser: true }).then(
+//   err => { console.log('error : ', err) }
+// );
+
+mongoose.connect('mongodb+srv://Razza:CaptainElan2696@cluster0-zxexs.mongodb.net/nhl?retryWrites=true', { useNewUrlParser: true }).then(
   err => { console.log('error : ', err) }
 );
+
+// const MongoClient = require('mongodb').MongoClient;
+// const uri = "mongodb+srv://Razza:CaptainElan2696@cluster0-zxexs.mongodb.net/nhl?retryWrites=true";
+// const client = new MongoClient(uri, { useNewUrlParser: true });
+// client.connect(err => {
+//   const collection = client.db("nhl").collection("user");
+//   console.log('collection : ', collection);
+//   client.close();
+// });
+
 
 app.use(passport.initialize());
 require('./passport')(passport);
