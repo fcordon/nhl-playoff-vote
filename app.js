@@ -28,80 +28,68 @@ app.use(express.static(path.join(__dirname, 'public')));
 // API
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-// mongoose.connect('mongodb://Razza:CaptainElan2696@cluster0-shard-00-00-zxexs.mongodb.net:27017,cluster0-shard-00-01-zxexs.mongodb.net:27017,cluster0-shard-00-02-zxexs.mongodb.net:27017/nhl?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true', { useNewUrlParser: true }).then(
-//   err => { console.log('error : ', err) }
-// );
-
 mongoose.connect('mongodb+srv://Razza:CaptainElan2696@cluster0-zxexs.mongodb.net/nhl?retryWrites=true', { useNewUrlParser: true }).then(
-  err => { console.log('error : ', err) }
+  () => {
+    console.log('Connection Established to MongoDB');
+
+    app.use(passport.initialize());
+    require('./passport')(passport);
+    app.use('/', users);
+
+    //---->>>> GET TEAMS <<<<----
+    app.get('/teams', function(req, res) {
+      Teams.find({}, function(err, team) {
+        if(err) {
+          throw err;
+        }
+        res.json(team);
+      })
+    });
+
+    //---->>>> POST VOTE <<<<----
+    app.post('/vote', function(req, res) {
+      let vote = req.body;
+
+      Vote.create(vote, function(err, votes) {
+        if(err) {
+          throw err;
+        }
+        res.json(votes);
+      })
+    });
+
+    //---->>>> GET VOTE <<<<----
+    app.get('/vote/:id', function(req, res) {
+      let userID = req.params.id
+
+      Vote.find({userID: userID}, function(err, votes) {
+        if(err) {
+          throw err;
+        }
+        res.json(votes);
+      })
+    });
+
+    // END API
+
+    // catch 404 and forward to error handler
+    app.use(function(req, res, next) {
+      let err = new Error('Not Found');
+      err.status = 404;
+      next(err);
+    });
+
+    // error handler
+    app.use(function(err, req, res, next) {
+      // set locals, only providing error in development
+      res.locals.message = err.message;
+      res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+      // render the error page
+      res.status(err.status || 500);
+      res.render('error');
+    });
+  }
 );
-
-// const MongoClient = require('mongodb').MongoClient;
-// const uri = "mongodb+srv://Razza:CaptainElan2696@cluster0-zxexs.mongodb.net/nhl?retryWrites=true";
-// const client = new MongoClient(uri, { useNewUrlParser: true });
-// client.connect(err => {
-//   const collection = client.db("nhl").collection("user");
-//   console.log('collection : ', collection);
-//   client.close();
-// });
-
-
-app.use(passport.initialize());
-require('./passport')(passport);
-app.use('/', users);
-
-//---->>>> GET TEAMS <<<<----
-app.get('/teams', function(req, res) {
-  Teams.find({}, function(err, team) {
-    if(err) {
-      throw err;
-    }
-    res.json(team);
-  })
-});
-
-//---->>>> POST VOTE <<<<----
-app.post('/vote', function(req, res) {
-  let vote = req.body;
-
-  Vote.create(vote, function(err, votes) {
-    if(err) {
-      throw err;
-    }
-    res.json(votes);
-  })
-});
-
-//---->>>> GET VOTE <<<<----
-app.get('/vote/:id', function(req, res) {
-  let userID = req.params.id
-
-  Vote.find({userID: userID}, function(err, votes) {
-    if(err) {
-      throw err;
-    }
-    res.json(votes);
-  })
-});
-
-// END API
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  let err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
 
 module.exports = app;
