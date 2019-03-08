@@ -26,27 +26,30 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // API
-// const mongoose = require('mongoose');
-// mongoose.Promise = global.Promise;
-// mongoose.connect('mongodb+srv://Razza:CaptainElan2696@cluster0-zxexs.mongodb.net/nhl?retryWrites=true', { useNewUrlParser: true }).then(
-//   () => { console.log('Connection Established to MongoDB');
-//  }
-// );
-
-const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb+srv://Razza:CaptainElan2696@cluster0-zxexs.mongodb.net/nhl?retryWrites=true';
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 
 async function main() {
-  const client = new MongoClient(url, { useNewUrlParser: true });
-
-  try {
-    await client.connect();
-    console.log('Connection established to MongoDB !');
-    await client.close();
-  } catch (err) {
-    console.dir(err);
-  }
+  mongoose.connect('mongodb+srv://Razza:CaptainElan2696@cluster0-zxexs.mongodb.net/nhl?retryWrites=true', { useNewUrlParser: true }).then(
+    () => { console.log('Connection Established to MongoDB');
+   }
+  );
 }
+
+// const MongoClient = require('mongodb').MongoClient;
+// const url = 'mongodb+srv://Razza:CaptainElan2696@cluster0-zxexs.mongodb.net/nhl?retryWrites=true';
+//
+// async function main() {
+//   const client = new MongoClient(url, { useNewUrlParser: true });
+//
+//   try {
+//     await client.connect();
+//     console.log('Connection established to MongoDB !');
+//     await client.close();
+//   } catch (err) {
+//     console.dir(err);
+//   }
+// }
 
 main().catch(console.dir);
 
