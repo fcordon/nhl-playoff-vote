@@ -66,7 +66,7 @@ app.use('/', users);
 
 //---->>>> GET TEAMS <<<<----
 app.get('/teams', function(req, res) {
-  Teams.find({}, function(err, team) {
+  Teams.find(function(err, team) {
     if(err) {
       throw err;
     }
