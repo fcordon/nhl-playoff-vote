@@ -65,11 +65,11 @@ class FormVote extends Component {
       }
 
       this.props.postVote(vote)
-      this.setState({ isValid: 'Votre vote est bien pris en compte' })
+      this.setState({ isValid: 'Merci ton vote est bien pris en compte' })
       setTimeout(
         function() {
           window.location.replace("/classement")
-        }, 1000
+        }, 1500
       )
     }
   }

@@ -26,6 +26,7 @@ class Vote extends Component {
 
   componentDidMount() {
     this.props.getVote(this.state.userID)
+    this.props.userVote.length === 1 && this.setState({ isVoted: true })
   }
 
   componentDidUpdate(prevState) {
