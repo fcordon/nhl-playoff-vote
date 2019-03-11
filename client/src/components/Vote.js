@@ -26,14 +26,19 @@ class Vote extends Component {
 
   componentDidMount() {
     this.props.getVote(this.state.userID)
-    this.props.userVote.length === 1 && this.setState({ isVoted: true })
+  }
+
+  componentDidUpdate(prevState) {
+    if (prevState.userVote.length !== this.props.userVote.length) {
+      this.setState({ isVoted: true })
+    }
   }
 
   render() {
     return (
       <Grid id='vote-form' fluid>
         <Col xs={12}>
-          {this.state.isVoted ? <FormVote /> : this.props.userVote.map((vote, i) => <UserVote key={i} {...vote} />)}
+          {this.state.isVoted ? this.props.userVote.map((vote, i) => <UserVote key={i} {...vote} />) : <FormVote />}
         </Col>
       </Grid>
     )

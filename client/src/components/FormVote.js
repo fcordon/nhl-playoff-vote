@@ -20,7 +20,8 @@ class FormVote extends Component {
 
     this.state = {
       'teamsSelected': [],
-      'errors': ''
+      'errors': '',
+      'isValid': ''
     }
   }
 
@@ -64,6 +65,12 @@ class FormVote extends Component {
       }
 
       this.props.postVote(vote)
+      this.setState({ isValid: 'Votre vote est bien pris en compte' })
+      setTimeout(
+        function() {
+          window.location.replace("/classement")
+        }, 1000
+      )
     }
   }
 
@@ -98,6 +105,7 @@ class FormVote extends Component {
             </Col>
           </Form>
         </Panel.Body>
+        {this.state.isValid !== '' && (<div className="valid-feedback">{this.state.isValid}</div>)}
       </Panel>
     )
   }
