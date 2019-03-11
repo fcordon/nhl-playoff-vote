@@ -5,8 +5,8 @@ import { authReducer } from './AuthReducer'
 import { errorReducer } from './ErrorReducer'
 
 export default combineReducers({
-    teams: TeamsReducer,
-    vote: VoteReducer,
-    errors: errorReducer,
-    auth: authReducer
+  teams: TeamsReducer,
+  vote: VoteReducer,
+  errors: errorReducer,
+  auth: authReducer
 })

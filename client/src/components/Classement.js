@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 
 class Classement extends Component {
-    render() {
-        return (
+  render() {
+    return (
 
-        )
-    }
+    )
+  }
 }
 
 export default Classement;

@@ -1,33 +1,39 @@
 .align-center {
-    text-align: center;
+  text-align: center;
 }
 
 ul li {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 .signup-to-signin {
-    padding: 0;
-    margin-top: 10px;
-    font-size: 12px;
+  padding: 0;
+  margin-top: 10px;
+  font-size: 12px;
 }
 
 #vote-form .nhl-logo {
-    width: 5vw;
-    margin-right: 30px;
+  width: 5vw;
+  margin-right: 30px;
 }
 
 .teams-logo {
-    width: 5vw;
+  width: 5vw;
 }
 
 #vote-form .form-checkbox {
-    float: left;
+  float: left;
 }
 
 #vote-form .invalid-feedback {
-    margin-top: 20px;
-    color: #ff0000;
-    font-weight: bold;
-    font-size: 16px;
+  margin-top: 20px;
+  color: #ff0000;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+@media screen and (max-width: 812px) {
+  .teams-logo {
+    width: 15vw;
+  }
 }

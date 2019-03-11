@@ -36,7 +36,7 @@ class ChangeUser extends Component {
 
   render() {
     return (
-      <Col xs={6} xsOffset={3}>
+      <Col xs={12} md={6} mdOffset={3}>
         <Panel>
           <Panel.Heading>
             <Panel.Title componentClass="h2">Modifie tes informations de compte</Panel.Title>
