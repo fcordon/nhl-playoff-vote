@@ -76,7 +76,7 @@ class FormVote extends Component {
       this.setState({ isValid: 'Merci ton vote est bien pris en compte' })
       setTimeout(
         function() {
-          window.location.replace("/classement")
+          window.location.href("/classement")
         }, 1500
       )
     }
