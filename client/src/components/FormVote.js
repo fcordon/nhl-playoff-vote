@@ -20,6 +20,7 @@ class FormVote extends Component {
 
     this.state = {
       'teamsSelected': [],
+      'count': 16,
       'errors': '',
       'isValid': ''
     }
@@ -30,11 +31,18 @@ class FormVote extends Component {
     const checked = e.target.checked
     let teamsArray = [...this.state.teamsSelected]
 
-    if(checked)
-    teamsArray.push(teamId)
+    if(checked) {
+      teamsArray.push(teamId)
+      this.setState({
+        'count': this.state.count - 1
+      })
+    }
     else {
       let teamIndex = teamsArray.indexOf(teamId)
       teamIndex !== -1 && teamsArray.splice(teamIndex, 1)
+      this.setState({
+        'count': this.state.count + 1
+      })
     }
 
     this.setState({
@@ -78,7 +86,9 @@ class FormVote extends Component {
     return (
       <Panel>
         <Panel.Heading>
-          <Panel.Title componentClass="h2"><img className='nhl-logo' src={nhlLogo} alt='NHL Logo' /> Teams</Panel.Title>
+          <Panel.Title componentClass="h2"><img className='nhl-logo' src={nhlLogo} alt='NHL Logo' />
+            Il te reste {this.state.count > 1 ? this.state.count + ' équipes' : this.state.count + ' équipe'} à sélectionner
+          </Panel.Title>
         </Panel.Heading>
         <Panel.Body>
           <Form onSubmit={this.onFormSubmit.bind(this)}>
