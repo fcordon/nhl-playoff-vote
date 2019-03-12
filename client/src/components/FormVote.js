@@ -1,5 +1,6 @@
 // Lib
 import React, { Component } from 'react'
+import PropTypes from "prop-types"
 import { Panel, Col, Form, FormGroup, Checkbox, Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -12,9 +13,8 @@ import { postVote } from '../actions/VoteAction'
 import nhlLogo from '../images/nhl.svg'
 
 class FormVote extends Component {
-
-  constructor(props) {
-    super(props)
+  constructor(props, context) {
+    super(props, context)
 
     this.props.getTeams()
 
@@ -76,8 +76,8 @@ class FormVote extends Component {
       this.setState({ isValid: 'Merci ton vote est bien pris en compte' })
       setTimeout(
         function() {
-          window.location.href("/classement")
-        }, 1500
+          this.context.router.history.push('/classement')
+        }.bind(this), 1500
       )
     }
   }
@@ -119,6 +119,10 @@ class FormVote extends Component {
       </Panel>
     )
   }
+}
+
+FormVote.contextTypes = {
+  router: PropTypes.object
 }
 
 const mapStateToProps = state => {
