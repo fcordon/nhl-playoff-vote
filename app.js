@@ -42,22 +42,6 @@ async function main() {
   }
 }
 
-async function runTransactionWithRetry(txnFunc, client, session) {
-  try {
-    await txnFunc(client, session);
-  } catch (error) {
-    console.log('Transaction aborted. Caught exception during transaction.');
-
-    // If transient error, retry the whole transaction
-    if (error.errorLabels && error.errorLabels.indexOf('TransientTransactionError') >= 0) {
-      console.log('TransientTransactionError, retrying transaction ...');
-      await runTransactionWithRetry(txnFunc, client, session);
-    } else {
-      throw error;
-    }
-  }
-}
-
 main().catch(console.dir);
 
 app.use(passport.initialize());
@@ -65,6 +49,10 @@ require('./passport')(passport);
 app.use('/', users);
 
 app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname + 'client/build/index.html'));
+});
+
+app.get('/vote', (req, res) => {
   res.sendFile(path.join(__dirname + 'client/build/index.html'));
 });
 
