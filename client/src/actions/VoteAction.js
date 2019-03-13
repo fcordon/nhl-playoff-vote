@@ -13,7 +13,7 @@ export function postVote(vote) {
   }
 }
 
-// GET VOTE
+// GET VOTE BY USER
 export function getVote(id) {
   return function(dispatch) {
     axios.get('/vote/' + id)
@@ -22,6 +22,19 @@ export function getVote(id) {
     })
     .catch(function(err) {
       dispatch({type:"GET_VOTE_REJECTED", payload:err})
+    })
+  }
+}
+
+// GET ALL VOTE
+export function getAllVote() {
+  return function(dispatch) {
+    axios.get('/vote')
+    .then(function(response) {
+      dispatch({type:"GET_ALL_VOTE", payload:response.data})
+    })
+    .catch(function(err) {
+      dispatch({type:"GET_ALL_VOTE_REJECTED", payload:err})
     })
   }
 }

@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom'
 import Signup from "./components/Signup"
 import Signin from "./components/Signin"
 import Vote from "./components/Vote"
+import Classement from "./components/Classement"
 import MonCompte from "./components/MonCompte"
 
 const Main = () => (
@@ -12,6 +13,7 @@ const Main = () => (
       <Route exact path='/' component={Signup}/>
       <Route path='/signin' component={Signin}/>
       <Route path='/vote' component={Vote}/>
+      <Route path='/classement' component={Classement}/>
       <Route path='/monCompte' component={MonCompte}/>
     </Switch>
   </main>

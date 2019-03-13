@@ -8,6 +8,7 @@ import { bindActionCreators } from 'redux'
 // Actions
 import { getTeams } from '../actions/TeamsAction'
 import { postVote } from '../actions/VoteAction'
+import { postClassement } from '../actions/ClassementAction'
 
 // Components
 import nhlLogo from '../images/nhl.svg'
@@ -72,8 +73,16 @@ class FormVote extends Component {
         'teams': this.state.teamsSelected
       }
 
+      let classement = {
+        'userID': localStorage.getItem('userID'),
+        'userPseudo': localStorage.getItem('userPseudo'),
+        'points': 0
+      }
+
       this.props.postVote(vote)
+      this.props.postClassement(classement)
       this.setState({ isValid: 'Merci ton vote est bien pris en compte' })
+      
       setTimeout(
         function() {
           this.context.router.history.push('/classement')
@@ -134,7 +143,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
     getTeams,
-    postVote
+    postVote,
+    postClassement
   }, dispatch);
 }
 

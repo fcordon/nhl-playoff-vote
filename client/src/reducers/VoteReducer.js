@@ -1,6 +1,7 @@
 const initialeState = {
   vote: [],
-  userVote: []
+  userVote: [],
+  allVote: []
 }
 
 export const VoteReducer = (state=initialeState, action) => {
@@ -12,6 +13,10 @@ export const VoteReducer = (state=initialeState, action) => {
     case 'GET_VOTE':
       return {...state, userVote:[...action.payload]};
     case "GET_VOTE_REJECTED":
+      return action.payload
+    case 'GET_ALL_VOTE':
+      return {...state, allVote:[...action.payload]};
+    case "GET_ALL_VOTE_REJECTED":
       return action.payload
     default: {
       return state

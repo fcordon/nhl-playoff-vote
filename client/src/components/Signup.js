@@ -10,6 +10,7 @@ import { registerUser } from "../actions/Authentication";
 class Signup extends Component {
   constructor() {
     super();
+
     this.state = {
       nom: '',
       prenom: '',
@@ -19,6 +20,7 @@ class Signup extends Component {
       password_confirm: '',
       errors: {}
     }
+
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
