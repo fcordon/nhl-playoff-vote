@@ -115,7 +115,8 @@ app.get('/classement', function(req, res) {
     if(err) {
       throw err;
     }
-    res.json(classement);
+    const newClassement = classement.sort((a,b) => a.points < b.points)
+    res.json(newClassement);
   })
 });
 

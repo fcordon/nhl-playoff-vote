@@ -4,27 +4,27 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import { getAllClassement } from '../actions/ClassementAction'
-import { ClassementTable } from '../components/ClassementTable'
 
 class Classement extends Component {
+  constructor(props) {
+    super(props)
 
-  componentDidMount() {
     this.props.getAllClassement()
   }
 
   render() {
     return (
-      <Col xs={12} className='user-vote'>
-        <Table>
+      <Col xs={12} md={4} mdOffset={4} className='align-center'>
+        <Table striped bordered hover responsive>
           <thead>
             <tr>
-              <th>Classement</th>
-              <th>Pseudo</th>
-              <th>Points</th>
+              <th className='align-center'>Classement</th>
+              <th className='align-center'>Pseudo</th>
+              <th className='align-center'>Points</th>
             </tr>
           </thead>
           <tbody>
-            {this.props.allClassement.map((stand, i) => <ClassementTable key={i} {...stand} />)}
+            {this.props.allClassement.map((stand, i) => <tr key={i}><td>{i + 1}</td><td>{stand.userPseudo}</td><td>{stand.points}</td></tr>)}
           </tbody>
         </Table>
       </Col>
