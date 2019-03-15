@@ -38,12 +38,15 @@ class FullNavbars extends Component {
           <LinkContainer to={"/classement"}>
             <NavItem eventKey={1}>Classement</NavItem>
           </LinkContainer>
+          <LinkContainer to={"/quiavotequoi"}>
+            <NavItem eventKey={2}>Qui a voté quoi !</NavItem>
+          </LinkContainer>
         </Nav>
         <Nav pullRight>
           <LinkContainer to={"/monCompte"}>
-            <NavItem eventKey={2}>Mon Compte</NavItem>
+            <NavItem eventKey={3}>Mon Compte</NavItem>
           </LinkContainer>
-          <NavItem eventKey={3} onClick={this.onLogout.bind(this)}>Me déconnecter</NavItem>
+          <NavItem eventKey={4} onClick={this.onLogout.bind(this)}>Me déconnecter</NavItem>
         </Nav>
       </Navbar.Collapse>
     )
