@@ -12,7 +12,7 @@ class FullNavbars extends Component {
     super(props)
 
     this.state = {
-      isAuthenticated: false,
+      isAuthenticated: localStorage.getItem('jwtToken') !== null ? true : false,
     }
   }
 
@@ -41,12 +41,15 @@ class FullNavbars extends Component {
           <LinkContainer to={"/quiavotequoi"}>
             <NavItem eventKey={2}>Qui a voté quoi !</NavItem>
           </LinkContainer>
+          <LinkContainer to={"/calendrier"}>
+            <NavItem eventKey={3}>Calendrier</NavItem>
+          </LinkContainer>
         </Nav>
         <Nav pullRight>
           <LinkContainer to={"/monCompte"}>
-            <NavItem eventKey={3}>Mon Compte</NavItem>
+            <NavItem eventKey={4}>Mon Compte</NavItem>
           </LinkContainer>
-          <NavItem eventKey={4} onClick={this.onLogout.bind(this)}>Me déconnecter</NavItem>
+          <NavItem eventKey={5} onClick={this.onLogout.bind(this)}>Me déconnecter</NavItem>
         </Nav>
       </Navbar.Collapse>
     )

@@ -7,6 +7,7 @@ import Vote from "./components/Vote"
 import Classement from "./components/Classement"
 import AllVote from "./components/AllVote"
 import MonCompte from "./components/MonCompte"
+import Schedule from "./components/Schedule"
 
 const Main = () => (
   <main>
@@ -16,6 +17,7 @@ const Main = () => (
       <Route path='/vote' component={Vote}/>
       <Route path='/classement' component={Classement}/>
       <Route path='/quiavotequoi' component={AllVote}/>
+      <Route path='/calendrier' component={Schedule}/>
       <Route path='/monCompte' component={MonCompte}/>
     </Switch>
   </main>
