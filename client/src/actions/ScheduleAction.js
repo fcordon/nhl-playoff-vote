@@ -9,12 +9,12 @@ today = yyyy+'-'+mm+'-'+dd
 
 // GET ARME
 export function getSchedule() {
-  return function(dispatch) {
+  return (dispatch) => {
     axios.get('https://statsapi.web.nhl.com/api/v1/schedule?startDate='+today+'&endDate=2019-04-06')
-    .then(function(response) {
+    .then((response) => {
       dispatch({type:"GET_SCHEDULE", payload:response.data.dates})
     })
-    .catch(function(err) {
+    .catch((err) => {
       dispatch({type:"GET_SCHEDULE_REJECTED", payload:err})
     })
   }
