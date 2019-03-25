@@ -44,6 +44,10 @@ ul li {
   color: #fff;
 }
 
+.games-teams {
+  display: flex;
+}
+
 @media screen and (max-width: 812px) {
   .teams-logo {
     width: 15vw;
