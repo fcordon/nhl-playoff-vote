@@ -18,17 +18,35 @@ export default class DisplaySchedule extends Component {
     return propsDate[2] + ' ' + this.state.months[monthIndex] + ' ' + propsDate[0]
   }
 
-  teamsLogo(teamName) {
-    // let teamIndex = this.props.teams.indexOf()
+  teamLogo(teamId) {
+    let teamLogo = ''
+
+    if(teamId === 54) {
+      teamLogo = 'https://www-league.nhlstatic.com/images/logos/teams-current-primary-light/54.svg'
+    } else {
+      teamLogo = 'https://www.nhl.com/site-core/images/team/logo/current/'+teamId+'_dark.svg'
+    }
+
+    return teamLogo
   }
 
   render() {
     return (
       <Panel.Body className='games'>
         <Col xs={12} className='games-date'>{this.formatDate(this.props.date)}</Col>
-        <Col xs={12} className='games-teams'>
-          {this.props.games.map((game, i) => <img key={i} src={this.teamsLogo(game.teams.away.team.name)} alt={game.teams.away.team.name} />)}
-        </Col>
+        {
+          this.props.games.map((game, i) => {
+            return (
+              <Col key={i} xs={12} className='games-teams'>
+                <img src={this.teamLogo(game.teams.away.team.id)} alt='teams logo' />
+                <p>{game.teams.away.team.name}</p>
+                <p> @ </p>
+                <img src={this.teamLogo(game.teams.home.team.id)} alt='teams logo' />
+                <p>{game.teams.home.team.name}</p>
+              </Col>
+            )
+          })
+        }
       </Panel.Body>
     )
   }
