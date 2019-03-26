@@ -54,6 +54,16 @@ ul li {
   align-items: center;
 }
 
+.navbar-brand {
+  padding-top: 0 !important;
+}
+
+.navbar-nav a {
+  font-size: 16px;
+  text-transform: uppercase;
+  padding-top: 5px;
+}
+
 @media screen and (max-width: 812px) {
   .teams-logo {
     width: 15vw;

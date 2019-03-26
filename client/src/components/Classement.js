@@ -14,7 +14,7 @@ class Classement extends Component {
 
   render() {
     return (
-      <Col xs={12} md={4} mdOffset={4} className='align-center'>
+      <Col xs={12} md={{ span: 4, offset: 4 }} className='align-center'>
         <Table striped bordered hover responsive>
           <thead>
             <tr>

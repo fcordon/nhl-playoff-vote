@@ -1,5 +1,5 @@
 import React, { Component }  from 'react'
-import { Navbar, Nav, NavItem } from 'react-bootstrap'
+import { Navbar, Nav } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -12,16 +12,12 @@ class FullNavbars extends Component {
     super(props)
 
     this.state = {
-      isAuthenticated: false,
+      isAuthenticated: localStorage.getItem('jwtToken') !== null ? true : false
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps.auth.isAuthenticated !== this.state.isAuthenticated) {
-      this.setState({ isAuthenticated: true })
-      return true
-    }
-    return false
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.auth.isAuthenticated === true) this.setState({isAuthenticated: true})
   }
 
   onLogout() {
@@ -33,25 +29,25 @@ class FullNavbars extends Component {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <LinkContainer to={"/vote"}>
-            <NavItem eventKey={0}>Vote !</NavItem>
+            <Nav.Link eventKey={0}>Vote !</Nav.Link>
           </LinkContainer>
           <LinkContainer to={"/classement"}>
-            <NavItem eventKey={1}>Classement</NavItem>
+            <Nav.Link eventKey={1}>Classement</Nav.Link>
           </LinkContainer>
           <LinkContainer to={"/quiavotequoi"}>
-            <NavItem eventKey={2}>Qui a voté quoi !</NavItem>
+            <Nav.Link eventKey={2}>Qui a voté quoi !</Nav.Link>
           </LinkContainer>
         </Nav>
         <Nav>
           <LinkContainer to={"/monCompte"}>
-            <NavItem eventKey={3}>Mon Compte</NavItem>
+            <Nav.Link eventKey={3}>Mon Compte</Nav.Link>
           </LinkContainer>
-          <NavItem eventKey={4} onClick={this.onLogout.bind(this)}>Me déconnecter</NavItem>
+          <Nav.Link eventKey={4} onClick={this.onLogout.bind(this)}>Me déconnecter</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     )
     return (
-      <Navbar bg="primary" expand="lg">
+      <Navbar bg="light" expand="lg">
         <Navbar.Brand className="navbar-brand">NHL vote app</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         {this.state.isAuthenticated ? authNav : null}

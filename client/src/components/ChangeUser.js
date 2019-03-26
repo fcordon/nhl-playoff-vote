@@ -36,7 +36,7 @@ class ChangeUser extends Component {
 
   render() {
     return (
-      <Col xs={12} md={6} mdOffset={3}>
+      <Col xs={12} md={{ span: 6, offset: 3 }}>
         <Card>
           <Card.Header>
             <Card.Title>Modifie tes informations de compte</Card.Title>

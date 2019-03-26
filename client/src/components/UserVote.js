@@ -22,7 +22,7 @@ class UserVote extends Component {
     }))
 
     return (
-      <Col xs={12} md={8} mdOffset={2} className='user-vote'>
+      <Col xs={12} md={{ span: 8, offset: 2 }} className='user-vote'>
         <Card>
           <Card.Header>
             <Card.Title>Voici ton vote pour les Playoffs</Card.Title>
