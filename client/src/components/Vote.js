@@ -1,6 +1,6 @@
 // Lib
 import React, { Component } from 'react'
-import { Grid, Col } from 'react-bootstrap'
+import { Container, Col } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -37,11 +37,11 @@ class Vote extends Component {
 
   render() {
     return (
-      <Grid id='vote-form' fluid>
+      <Container id='vote-form' fluid>
         <Col xs={12}>
           {this.state.isVoted ? this.props.userVote.map((vote, i) => <UserVote key={i} {...vote} />) : <FormVote />}
         </Col>
-      </Grid>
+      </Container>
     )
   }
 }

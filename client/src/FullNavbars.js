@@ -1,5 +1,5 @@
 import React, { Component }  from 'react'
-import { Nav, Navbar, NavItem } from 'react-bootstrap'
+import { Navbar, Nav, NavItem } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -30,8 +30,8 @@ class FullNavbars extends Component {
 
   render() {
     const authNav = (
-      <Navbar.Collapse>
-        <Nav>
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="mr-auto">
           <LinkContainer to={"/vote"}>
             <NavItem eventKey={0}>Vote !</NavItem>
           </LinkContainer>
@@ -42,7 +42,7 @@ class FullNavbars extends Component {
             <NavItem eventKey={2}>Qui a voté quoi !</NavItem>
           </LinkContainer>
         </Nav>
-        <Nav pullRight>
+        <Nav>
           <LinkContainer to={"/monCompte"}>
             <NavItem eventKey={3}>Mon Compte</NavItem>
           </LinkContainer>
@@ -51,13 +51,9 @@ class FullNavbars extends Component {
       </Navbar.Collapse>
     )
     return (
-      <Navbar collapseOnSelect>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <div className="navbar-brand">NHL vote app</div>
-          </Navbar.Brand>
-          <Navbar.Toggle id='collapseButton' />
-        </Navbar.Header>
+      <Navbar bg="primary" expand="lg">
+        <Navbar.Brand className="navbar-brand">NHL vote app</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
         {this.state.isAuthenticated ? authNav : null}
       </Navbar>
     )

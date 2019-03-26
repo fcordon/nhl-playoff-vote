@@ -11,6 +11,7 @@ const passport = require('passport');
 const app = express();
 
 const Teams = require('./models/teams');
+const Series = require('./models/series');
 const Vote = require('./models/vote');
 const Classement = require('./models/classement');
 const users = require('./routes/user');
@@ -60,6 +61,16 @@ app.get('/teams', function(req, res) {
       throw err;
     }
     res.json(team);
+  })
+});
+
+//---->>>> GET SERIES <<<<----
+app.get('/series', function(req, res) {
+  Series.find({}, function(err, serie) {
+    if(err) {
+      throw err;
+    }
+    res.json(serie);
   })
 });
 

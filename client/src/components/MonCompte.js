@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Grid, Col, Button } from 'react-bootstrap'
+import { Container, Col, Button } from 'react-bootstrap'
 
 import { getUser } from '../actions/Authentication'
 import { getVote, getAllVote } from '../actions/VoteAction'
@@ -49,7 +49,7 @@ export class MonCompte extends Component {
 
   render() {
     return (
-      <Grid id="mon-compte" className="vertical-middle" fluid>
+      <Container id="mon-compte" className="vertical-middle" fluid>
         <Col xs={12}>
           <h1 className="align-center">Voici ton compte {this.state.userPseudo}</h1>
           {this.props.userData.map((user, i) => <ChangeUser key={i} {...user} />)}
@@ -58,7 +58,7 @@ export class MonCompte extends Component {
           {this.props.userVote.map((vote, i) => <UserVote key={i} {...vote} />)}
         </Col>
         {this.state.isAdmin ? <Col xs={12} className="align-center"><Button onClick={this.getPoints.bind(this)}>Calculer les points</Button></Col> : null}
-      </Grid>
+      </Container>
     )
   }
 }

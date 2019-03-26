@@ -1,3 +1,7 @@
+main {
+  padding-top: 30px;
+}
+
 .align-center {
   text-align: center;
 }
@@ -42,6 +46,12 @@ ul li {
   padding: 10%;
   font-size: 20px;
   color: #fff;
+}
+
+.form-series {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (max-width: 812px) {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Col, Panel } from 'react-bootstrap'
+import { Col, Card } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -23,14 +23,14 @@ class UserVote extends Component {
 
     return (
       <Col xs={12} md={8} mdOffset={2} className='user-vote'>
-        <Panel>
-          <Panel.Heading>
-            <Panel.Title componentClass="h2">Voici ton vote pour les Playoffs</Panel.Title>
-          </Panel.Heading>
-          <Panel.Body className='user-vote-list'>
+        <Card>
+          <Card.Header>
+            <Card.Title>Voici ton vote pour les Playoffs</Card.Title>
+          </Card.Header>
+          <Card.Body className='user-vote-list'>
             {teamsSelected}
-          </Panel.Body>
-        </Panel>
+          </Card.Body>
+        </Card>
       </Col>
     )
   }

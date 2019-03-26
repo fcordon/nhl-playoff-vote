@@ -1,6 +1,6 @@
 // Lib
 import React, { Component } from 'react'
-import { Panel, Col } from 'react-bootstrap'
+import { Card, Col } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -22,14 +22,14 @@ class DisplayVote extends Component {
       return true
     }))
     return (
-      <Panel>
-        <Panel.Heading>
-          <Panel.Title componentClass="h2">Vote de {this.props.userPseudo}</Panel.Title>
-        </Panel.Heading>
-        <Panel.Body className='user-vote-list'>
+      <Card>
+        <Card.Header>
+          <Card.Title>Vote de {this.props.userPseudo}</Card.Title>
+        </Card.Header>
+        <Card.Body className='user-vote-list'>
           {teamsSelected}
-        </Panel.Body>
-      </Panel>
+        </Card.Body>
+      </Card>
     )
   }
 }

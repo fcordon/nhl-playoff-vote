@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Col, Panel, Button, FormGroup, InputGroup, FormControl } from 'react-bootstrap'
+import { Col, Card, Button, FormGroup, InputGroup, FormControl } from 'react-bootstrap'
 import { findDOMNode } from 'react-dom'
 
 import { updateUser, logoutUser } from '../actions/Authentication'
@@ -37,11 +37,11 @@ class ChangeUser extends Component {
   render() {
     return (
       <Col xs={12} md={6} mdOffset={3}>
-        <Panel>
-          <Panel.Heading>
-            <Panel.Title componentClass="h2">Modifie tes informations de compte</Panel.Title>
-          </Panel.Heading>
-          <Panel.Body>
+        <Card>
+          <Card.Header>
+            <Card.Title>Modifie tes informations de compte</Card.Title>
+          </Card.Header>
+          <Card.Body>
             {this.state.modifyUser ?
               <ul>
                 <li>
@@ -94,8 +94,8 @@ class ChangeUser extends Component {
                 <li><Button onClick={this.modifyUser.bind(this)}>Modifier</Button></li>
               </ul>
             }
-          </Panel.Body>
-        </Panel>
+          </Card.Body>
+        </Card>
       </Col>
     )
   }

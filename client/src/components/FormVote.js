@@ -1,12 +1,13 @@
 // Lib
 import React, { Component } from 'react'
 import PropTypes from "prop-types"
-import { Panel, Col, Form, FormGroup, Checkbox, Button } from 'react-bootstrap'
+import Form from 'react-bootstrap/Form'
+import { Card, Col, Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 // Actions
-import { getTeams } from '../actions/TeamsAction'
+import { getSeries } from '../actions/SeriesAction'
 import { postVote } from '../actions/VoteAction'
 import { postClassement } from '../actions/ClassementAction'
 
@@ -17,7 +18,7 @@ class FormVote extends Component {
   constructor(props, context) {
     super(props, context)
 
-    this.props.getTeams()
+    this.props.getSeries()
 
     this.state = {
       'teamsSelected': [],
@@ -82,7 +83,7 @@ class FormVote extends Component {
       this.props.postVote(vote)
       this.props.postClassement(classement)
       this.setState({ isValid: 'Merci ton vote est bien pris en compte' })
-      
+
       setTimeout(
         function() {
           this.context.router.history.push('/classement')
@@ -93,41 +94,48 @@ class FormVote extends Component {
 
   render() {
     return (
-      <Panel>
-        <Panel.Heading>
-          <Panel.Title componentClass="h2"><img className='nhl-logo' src={nhlLogo} alt='NHL Logo' />
-            Il te reste {this.state.count > 1 ? this.state.count + ' équipes' : this.state.count + ' équipe'} à sélectionner
-          </Panel.Title>
-        </Panel.Heading>
-        <Panel.Body>
-          <Form onSubmit={this.onFormSubmit.bind(this)}>
-            {this.props.teams.map((teams, i) =>
-              <Col xs={12} md={4} lg={3} key={i}>
-                <FormGroup>
-                  <label>
-                    <img className='teams-logo' src={teams.img} alt={teams.name} />
-                    {teams.name}
-                    <Checkbox
-                      className='form-checkbox'
-                      id={teams._id}
-                      name={teams.name}
-                      onChange={this.onTeamChange.bind(this)}
-                      value={teams.name}
-                      ></Checkbox>
-                  </label>
-                </FormGroup>
-              </Col>
-            )}
-            <Col xs={12} className='align-center'>
-              <Button type="submit">Submit</Button>
-              {this.state.errors !== '' && (<div className="invalid-feedback">{this.state.errors}</div>)}
-            </Col>
-          </Form>
-        </Panel.Body>
-        {this.state.isValid !== '' && (<div className="valid-feedback">{this.state.isValid}</div>)}
-      </Panel>
-    )
-  }
+      <Card>
+        <Card.Header>
+          <Card.Title><img className='nhl-logo' src={nhlLogo} alt='NHL Logo' />
+          Il te reste {this.state.count > 1 ? this.state.count + ' équipes' : this.state.count + ' équipe'} à sélectionner
+        </Card.Title>
+      </Card.Header>
+      <Card.Body>
+        <Form onSubmit={this.onFormSubmit.bind(this)}>
+          <Col xs={12}>
+            {
+              this.props.series.map((serie, i) => {
+                return(
+                  <Col xs={12} key={i} className='form-series'>
+                    <img src={serie.team1.img} alt={serie.team1.name} />
+                    <p>{serie.team1.name}</p>
+                    <Form.Group>
+                      <Form.Control as="select">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                      </Form.Control>
+                    </Form.Group>
+                    <p>-</p>
+                    <p>{serie.team2.score}</p>
+                    <p>{serie.team2.name}</p>
+                    <img src={serie.team2.img} alt={serie.team2.name} />
+                  </Col>
+                )
+              })
+            }
+          </Col>
+          <Col xs={12} className='align-center'>
+            <Button type="submit">Submit</Button>
+            {this.state.errors !== '' && (<div className="invalid-feedback">{this.state.errors}</div>)}
+          </Col>
+        </Form>
+      </Card.Body>
+      {this.state.isValid !== '' && (<div className="valid-feedback">{this.state.isValid}</div>)}
+    </Card>
+  )
+}
 }
 
 FormVote.contextTypes = {
@@ -136,13 +144,13 @@ FormVote.contextTypes = {
 
 const mapStateToProps = state => {
   return {
-    teams: state.teams.teams
+    series: state.series.series
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    getTeams,
+    getSeries,
     postVote,
     postClassement
   }, dispatch);
