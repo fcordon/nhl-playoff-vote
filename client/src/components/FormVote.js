@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form'
 import { Card, Col, Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+// import { findDOMNode } from 'react-dom'
 
 // Actions
 import { getSeries } from '../actions/SeriesAction'
@@ -21,121 +22,108 @@ class FormVote extends Component {
     this.props.getSeries()
 
     this.state = {
-      'teamsSelected': [],
-      'count': 16,
-      'errors': '',
-      'isValid': ''
+      vote: [],
+      errors: ''
     }
   }
 
-  onTeamChange(e) {
-    const teamId = e.target.id
-    const checked = e.target.checked
-    let teamsArray = [...this.state.teamsSelected]
+  processBdd() {
+    this.state.vote.map((votes, i) => {
+      console.log('votes : ', votes)
 
-    if(checked) {
-      teamsArray.push(teamId)
-      this.setState({
-        'count': this.state.count - 1
-      })
-    }
-    else {
-      let teamIndex = teamsArray.indexOf(teamId)
-      teamIndex !== -1 && teamsArray.splice(teamIndex, 1)
-      this.setState({
-        'count': this.state.count + 1
-      })
-    }
-
-    this.setState({
-      'teamsSelected': teamsArray,
-      'errors': ''
+      return votes
     })
   }
 
   onFormSubmit(e) {
     e.preventDefault()
-    let teamsLength = this.state.teamsSelected.length
+    this.props.series.map((serie, i) => {
+      let selectTeams1 = document.getElementById(serie.team1.id)
+      let selectTeams2 = document.getElementById(serie.team2.id)
+      let valueTeams1 = parseInt(selectTeams1.value)
+      let valueTeams2 = parseInt(selectTeams2.value)
 
-    if(teamsLength < 16) {
-      let teamsDiff = 16 - teamsLength
-      this.setState({
-        'errors': 'Il te manque ' + teamsDiff + ' équipe(s)'
+      this.state.vote.push({
+        'seriesId': serie._id,
+        'team1': {
+          'score': valueTeams1
+        },
+        'team2': {
+          'score': valueTeams2
+        },
+        'winner': valueTeams1 > valueTeams2 ? 'team1' : 'team2',
+        'diff': valueTeams1 - valueTeams2
       })
-    } else if(teamsLength > 16) {
-      let teamsDiff = teamsLength - 16
-      this.setState({
-        'errors': 'Tu as sélectionné ' + teamsDiff + ' équipe(s) en trop'
-      })
-    } else {
-      let vote = {
-        'userID': localStorage.getItem('userID'),
-        'userPseudo': localStorage.getItem('userPseudo'),
-        'teams': this.state.teamsSelected
-      }
 
-      let classement = {
-        'userID': localStorage.getItem('userID'),
-        'userPseudo': localStorage.getItem('userPseudo'),
-        'points': 0
-      }
-
-      this.props.postVote(vote)
-      this.props.postClassement(classement)
-      this.setState({ isValid: 'Merci ton vote est bien pris en compte' })
-
-      setTimeout(
-        function() {
-          this.context.router.history.push('/classement')
-        }.bind(this), 1500
-      )
-    }
+      return this.state.vote
+    })
+    this.processBdd()
   }
 
   render() {
     return (
       <Card>
         <Card.Header>
-          <Card.Title><img className='nhl-logo' src={nhlLogo} alt='NHL Logo' />
-          Il te reste {this.state.count > 1 ? this.state.count + ' équipes' : this.state.count + ' équipe'} à sélectionner
-        </Card.Title>
-      </Card.Header>
-      <Card.Body>
-        <Form onSubmit={this.onFormSubmit.bind(this)}>
-          <Col xs={12}>
-            {
-              this.props.series.map((serie, i) => {
-                return(
-                  <Col xs={12} key={i} className='form-series'>
-                    <img src={serie.team1.img} alt={serie.team1.name} />
-                    <p>{serie.team1.name}</p>
-                    <Form.Group>
-                      <Form.Control as="select">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                      </Form.Control>
-                    </Form.Group>
-                    <p>-</p>
-                    <p>{serie.team2.score}</p>
-                    <p>{serie.team2.name}</p>
-                    <img src={serie.team2.img} alt={serie.team2.name} />
-                  </Col>
-                )
-              })
-            }
-          </Col>
-          <Col xs={12} className='align-center'>
-            <Button type="submit">Submit</Button>
-            {this.state.errors !== '' && (<div className="invalid-feedback">{this.state.errors}</div>)}
-          </Col>
-        </Form>
-      </Card.Body>
-      {this.state.isValid !== '' && (<div className="valid-feedback">{this.state.isValid}</div>)}
-    </Card>
-  )
-}
+          <Card.Title>
+            <img className='nhl-logo' src={nhlLogo} alt='NHL Logo' />
+            C'est le moment de voter pour les series
+          </Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <Form onSubmit={this.onFormSubmit.bind(this)}>
+            <Col xs={12}>
+              {
+                this.props.series.map((serie, i) => {
+                  return(
+                    <Col xs={12} key={i} className='form-series'>
+                      <Col xs={3} className='align-center'>
+                        <img src={serie.team1.img} alt={serie.team1.name} />
+                        <p className='series-teams-name'>{serie.team1.name}</p>
+                      </Col>
+                      <Col xs={1}>
+                        <Form.Group>
+                          <Form.Control as="select" id={serie.team1.id}>
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                          </Form.Control>
+                        </Form.Group>
+                      </Col>
+                      <Col xs={2} className='align-center'>
+                        <p className='series-versus'>VS</p>
+                      </Col>
+                      <Col xs={1}>
+                        <Form.Group>
+                          <Form.Control as="select" id={serie.team2.id}>
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                          </Form.Control>
+                        </Form.Group>
+                      </Col>
+                      <Col xs={3} className='align-center'>
+                        <img src={serie.team2.img} alt={serie.team2.name} />
+                        <p className='series-teams-name'>{serie.team2.name}</p>
+                      </Col>
+                    </Col>
+                  )
+                })
+              }
+            </Col>
+            <Col xs={12} className='align-center'>
+              <Button type="submit">Submit</Button>
+              {this.state.errors !== '' && (<div className="invalid-feedback">{this.state.errors}</div>)}
+            </Col>
+          </Form>
+        </Card.Body>
+        {this.state.isValid !== '' && (<div className="valid-feedback">{this.state.isValid}</div>)}
+      </Card>
+    )
+  }
 }
 
 FormVote.contextTypes = {
