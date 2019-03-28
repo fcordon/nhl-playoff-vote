@@ -82,6 +82,22 @@ ul li {
   font-weight: 700;
 }
 
+.user-series-vote {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  margin-bottom: 50px;
+}
+
+.user-series-vote-score {
+  font-size: 20px;
+}
+
+.user-series-vote-bold {
+  font-weight: 700;
+}
+
 @media screen and (max-width: 812px) {
   .teams-logo {
     width: 15vw;

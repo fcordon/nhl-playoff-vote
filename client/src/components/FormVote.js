@@ -7,8 +7,6 @@ import { bindActionCreators } from 'redux'
 
 // Actions
 import { getSeries, postSeries } from '../actions/SeriesAction'
-import { postVote } from '../actions/VoteAction'
-import { postClassement } from '../actions/ClassementAction'
 
 // Components
 import nhlLogo from '../images/nhl.svg'
@@ -47,12 +45,16 @@ class FormVote extends Component {
         return this.state.errors
       } else {
         this.state.vote.push({
-          'userId': localStorage.getItem('userID'),
+          'userID': localStorage.getItem('userID'),
           'seriesId': serie._id,
           'team1': {
+            'name': serie.team1.name,
+            'img': serie.team1.img,
             'score': valueTeams1
           },
           'team2': {
+            'name': serie.team2.name,
+            'img': serie.team2.img,
             'score': valueTeams2
           },
           'winner': valueTeams1 > valueTeams2 ? 'team1' : 'team2',
@@ -148,9 +150,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    getSeries, postSeries,
-    postVote,
-    postClassement
+    getSeries, postSeries
   }, dispatch);
 }
 

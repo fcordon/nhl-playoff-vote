@@ -39,7 +39,7 @@ class Vote extends Component {
     return (
       <Container id='vote-form' fluid>
         <Col xs={12}>
-          {this.state.isVoted ? this.props.userSeries.map((vote, i) => <UserVote key={i} {...vote} />) : <FormVote />}
+          {this.state.isVoted ? this.props.userSeries.map((vote, i) => <UserVote key={i} {...vote} match={i} />) : <FormVote />}
         </Col>
       </Container>
     )
