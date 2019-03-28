@@ -2,13 +2,12 @@
 import React, { Component } from 'react'
 import PropTypes from "prop-types"
 import Form from 'react-bootstrap/Form'
-import { Card, Col, Button } from 'react-bootstrap'
+import { Card, Row, Col, Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-// import { findDOMNode } from 'react-dom'
 
 // Actions
-import { getSeries } from '../actions/SeriesAction'
+import { getSeries, postSeries } from '../actions/SeriesAction'
 import { postVote } from '../actions/VoteAction'
 import { postClassement } from '../actions/ClassementAction'
 
@@ -31,32 +30,41 @@ class FormVote extends Component {
     this.state.vote.map((votes, i) => {
       console.log('votes : ', votes)
 
+      this.props.postSeries(votes)
+
       return votes
     })
   }
 
   onFormSubmit(e) {
     e.preventDefault()
+
     this.props.series.map((serie, i) => {
       let selectTeams1 = document.getElementById(serie.team1.id)
       let selectTeams2 = document.getElementById(serie.team2.id)
       let valueTeams1 = parseInt(selectTeams1.value)
       let valueTeams2 = parseInt(selectTeams2.value)
 
-      this.state.vote.push({
-        'seriesId': serie._id,
-        'team1': {
-          'score': valueTeams1
-        },
-        'team2': {
-          'score': valueTeams2
-        },
-        'winner': valueTeams1 > valueTeams2 ? 'team1' : 'team2',
-        'diff': valueTeams1 - valueTeams2
-      })
-
-      return this.state.vote
+      if (valueTeams1 === valueTeams2) {
+        this.setState({ errors: 'Attention tu as deux équipes égalités' })
+        return this.state.errors
+      } else {
+        this.state.vote.push({
+          'userId': localStorage.getItem('userID'),
+          'seriesId': serie._id,
+          'team1': {
+            'score': valueTeams1
+          },
+          'team2': {
+            'score': valueTeams2
+          },
+          'winner': valueTeams1 > valueTeams2 ? 'team1' : 'team2',
+          'diff': valueTeams1 - valueTeams2
+        })
+        return this.state.vote
+      }
     })
+
     this.processBdd()
   }
 
@@ -75,41 +83,45 @@ class FormVote extends Component {
               {
                 this.props.series.map((serie, i) => {
                   return(
-                    <Col xs={12} key={i} className='form-series'>
-                      <Col xs={3} className='align-center'>
-                        <img src={serie.team1.img} alt={serie.team1.name} />
-                        <p className='series-teams-name'>{serie.team1.name}</p>
+                    <Row key={i} className='form-series'>
+                      <Col xs={12} md={4} lg={3} className='form-series-col'>
+                        <Col xs={6} md={8} className='align-center'>
+                          <img src={serie.team1.img} alt={serie.team1.name} />
+                          <p className='series-teams-name'>{serie.team1.name}</p>
+                        </Col>
+                        <Col xs={6} md={4}>
+                          <Form.Group>
+                            <Form.Control as="select" id={serie.team1.id}>
+                              <option>0</option>
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                            </Form.Control>
+                          </Form.Group>
+                        </Col>
                       </Col>
-                      <Col xs={1}>
-                        <Form.Group>
-                          <Form.Control as="select" id={serie.team1.id}>
-                            <option>0</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                          </Form.Control>
-                        </Form.Group>
-                      </Col>
-                      <Col xs={2} className='align-center'>
+                      <Col xs={12} md={2} className='align-center'>
                         <p className='series-versus'>VS</p>
                       </Col>
-                      <Col xs={1}>
-                        <Form.Group>
-                          <Form.Control as="select" id={serie.team2.id}>
-                            <option>0</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                          </Form.Control>
-                        </Form.Group>
+                      <Col xs={12} md={4} lg={3} className='form-series-col'>
+                        <Col xs={6} md={4}>
+                          <Form.Group>
+                            <Form.Control as="select" id={serie.team2.id}>
+                              <option>0</option>
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                            </Form.Control>
+                          </Form.Group>
+                        </Col>
+                        <Col xs={6} md={8} className='align-center'>
+                          <img src={serie.team2.img} alt={serie.team2.name} />
+                          <p className='series-teams-name'>{serie.team2.name}</p>
+                        </Col>
                       </Col>
-                      <Col xs={3} className='align-center'>
-                        <img src={serie.team2.img} alt={serie.team2.name} />
-                        <p className='series-teams-name'>{serie.team2.name}</p>
-                      </Col>
-                    </Col>
+                    </Row>
                   )
                 })
               }
@@ -138,7 +150,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    getSeries,
+    getSeries, postSeries,
     postVote,
     postClassement
   }, dispatch);

@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-// GET ARME
 export function getSeries() {
   return function(dispatch) {
     axios.get('/series')
@@ -9,6 +8,18 @@ export function getSeries() {
     })
     .catch(function(err) {
       dispatch({type:"GET_SERIES_REJECTED", payload:err})
+    })
+  }
+}
+
+export function postSeries(vote) {
+  return function(dispatch) {
+    axios.post('/voteseries', vote)
+    .then(function(response) {
+      dispatch({type:"POST_SERIES", payload:response.data})
+    })
+    .catch(function(err) {
+      dispatch({type:"POST_SERIES_REJECTED", payload:err})
     })
   }
 }
