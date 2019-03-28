@@ -87,6 +87,18 @@ app.post('/voteseries', function(req, res) {
   })
 });
 
+//---->>>> GET USER SERIES VOTE <<<<----
+app.get('/voteseries/:id', function(req, res) {
+  let userID = req.params.id
+
+  VoteSeries.find({userID: userID}, function(err, votes) {
+    if(err) {
+      throw err;
+    }
+    res.json(votes);
+  })
+});
+
 //---->>>> POST VOTE <<<<----
 app.post('/vote', function(req, res) {
   let vote = req.body;

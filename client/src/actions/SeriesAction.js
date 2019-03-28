@@ -23,3 +23,15 @@ export function postSeries(vote) {
     })
   }
 }
+
+export function getUserSeries(id) {
+  return function(dispatch) {
+    axios.get('/voteseries/' + id)
+    .then(function(response) {
+      dispatch({type:"GET_USER_SERIES_VOTE", payload:response.data})
+    })
+    .catch(function(err) {
+      dispatch({type:"GET_USER_SERIES_VOTE_REJECTED", payload:err})
+    })
+  }
+}

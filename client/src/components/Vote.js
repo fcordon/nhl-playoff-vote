@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 // Actions
-import { getVote } from '../actions/VoteAction'
+import { getUserSeries } from '../actions/SeriesAction'
 
 // Components
 import UserVote from '../components/UserVote'
@@ -25,12 +25,12 @@ class Vote extends Component {
   }
 
   componentDidMount() {
-    this.props.getVote(this.state.userID)
-    this.props.userVote.length === 1 && this.setState({ isVoted: true })
+    this.props.getUserSeries(this.state.userID)
+    this.props.userSeries.length === 1 && this.setState({ isVoted: true })
   }
 
   componentDidUpdate(prevState) {
-    if (prevState.userVote.length !== this.props.userVote.length) {
+    if (prevState.userSeries.length !== this.props.userSeries.length) {
       this.setState({ isVoted: true })
     }
   }
@@ -39,7 +39,7 @@ class Vote extends Component {
     return (
       <Container id='vote-form' fluid>
         <Col xs={12}>
-          {this.state.isVoted ? this.props.userVote.map((vote, i) => <UserVote key={i} {...vote} />) : <FormVote />}
+          {this.state.isVoted ? this.props.userSeries.map((vote, i) => <UserVote key={i} {...vote} />) : <FormVote />}
         </Col>
       </Container>
     )
@@ -48,13 +48,13 @@ class Vote extends Component {
 
 const mapStateToProps = state => {
   return {
-    userVote: state.vote.userVote
+    userSeries: state.series.userSeries
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    getVote
+    getUserSeries
   }, dispatch);
 }
 

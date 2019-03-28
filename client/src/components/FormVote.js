@@ -1,8 +1,7 @@
 // Lib
 import React, { Component } from 'react'
 import PropTypes from "prop-types"
-import Form from 'react-bootstrap/Form'
-import { Card, Row, Col, Button } from 'react-bootstrap'
+import { Card, Row, Col, Form, Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -22,16 +21,14 @@ class FormVote extends Component {
 
     this.state = {
       vote: [],
+      isValid: '',
       errors: ''
     }
   }
 
   processBdd() {
     this.state.vote.map((votes, i) => {
-      console.log('votes : ', votes)
-
       this.props.postSeries(votes)
-
       return votes
     })
   }
@@ -84,6 +81,7 @@ class FormVote extends Component {
                 this.props.series.map((serie, i) => {
                   return(
                     <Row key={i} className='form-series'>
+                      <Col xs={12} className='align-center'><h3>Match {i + 1}</h3></Col>
                       <Col xs={12} md={4} lg={3} className='form-series-col'>
                         <Col xs={6} md={8} className='align-center'>
                           <img src={serie.team1.img} alt={serie.team1.name} />
