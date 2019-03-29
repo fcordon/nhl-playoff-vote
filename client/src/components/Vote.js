@@ -1,6 +1,6 @@
 // Lib
 import React, { Component } from 'react'
-import { Container, Col } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -36,9 +36,9 @@ class Vote extends Component {
   render() {
     return (
       <Container id='vote-form' fluid>
-        <Col xs={12}>
+        <Row>
           {this.state.isVoted ? this.props.userSeries.map((vote, i) => <UserVote key={i} {...vote} match={i} />) : <FormVote />}
-        </Col>
+        </Row>
       </Container>
     )
   }
