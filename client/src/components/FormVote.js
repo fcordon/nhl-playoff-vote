@@ -18,17 +18,22 @@ class FormVote extends Component {
     this.props.getSeries()
 
     this.state = {
-      vote: [],
-      isValid: '',
-      errors: ''
+      'vote': [],
+      'errors': ''
     }
   }
 
   processBdd() {
-    this.state.vote.map((votes, i) => {
-      this.props.postSeries(votes)
-      return votes
-    })
+    if (this.props.series.length === this.state.vote.length) {
+      this.state.vote.map((votes, i) => {
+        this.props.postSeries(votes)
+        return votes
+      })
+      
+      this.context.router.history.push('/classement')
+    } else {
+      this.setState({ errors: 'Attention tu as deux équipes égalités' })
+    }
   }
 
   onFormSubmit(e) {
@@ -40,10 +45,7 @@ class FormVote extends Component {
       let valueTeams1 = parseInt(selectTeams1.value)
       let valueTeams2 = parseInt(selectTeams2.value)
 
-      if (valueTeams1 === valueTeams2) {
-        this.setState({ errors: 'Attention tu as deux équipes égalités' })
-        return this.state.errors
-      } else {
+      if (valueTeams1 !== valueTeams2) {
         this.state.vote.push({
           'userID': localStorage.getItem('userID'),
           'seriesId': serie._id,
@@ -62,6 +64,8 @@ class FormVote extends Component {
         })
         return this.state.vote
       }
+
+      return false
     })
 
     this.processBdd()
@@ -129,11 +133,10 @@ class FormVote extends Component {
               </Col>
               <Col xs={12} className='align-center'>
                 <Button type="submit">Submit</Button>
-                {this.state.errors !== '' && (<div className="invalid-feedback">{this.state.errors}</div>)}
+                {this.state.errors !== '' && (<Col xs={12} className="invalid-feedback">{this.state.errors}</Col>)}
               </Col>
             </Form>
           </Card.Body>
-          {this.state.isValid !== '' && (<div className="valid-feedback">{this.state.isValid}</div>)}
         </Card>
       </Col>
     )

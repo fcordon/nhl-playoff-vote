@@ -34,6 +34,7 @@ ul li {
   color: #ff0000;
   font-weight: bold;
   font-size: 16px;
+  display: block;
 }
 
 #vote-form .valid-feedback {
