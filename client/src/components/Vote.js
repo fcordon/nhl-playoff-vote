@@ -29,10 +29,8 @@ class Vote extends Component {
     this.props.userSeries.length === 1 && this.setState({ isVoted: true })
   }
 
-  componentDidUpdate(prevState) {
-    if (prevState.userSeries.length !== this.props.userSeries.length) {
-      this.setState({ isVoted: true })
-    }
+  componentWillReceiveProps(nextProps) {
+    nextProps.userSeries.length !== 0 && this.setState({isVoted: true})
   }
 
   render() {
