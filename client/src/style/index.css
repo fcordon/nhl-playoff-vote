@@ -57,6 +57,11 @@ ul li {
   color: #fff;
 }
 
+.user-vote-list-item.qualifying {
+  color: green;
+  font-weight: 700;
+}
+
 #mon-compte ul li {
   padding-bottom: 5px;
 }
