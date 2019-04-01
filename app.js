@@ -11,6 +11,8 @@ const passport = require('passport');
 const app = express();
 
 const Teams = require('./models/teams');
+const Series = require('./models/series');
+const VoteSeries = require('./models/voteseries');
 const Vote = require('./models/vote');
 const Classement = require('./models/classement');
 const users = require('./routes/user');
@@ -60,6 +62,40 @@ app.get('/teams', function(req, res) {
       throw err;
     }
     res.json(team);
+  })
+});
+
+//---->>>> GET SERIES <<<<----
+app.get('/series', function(req, res) {
+  Series.find({}, function(err, serie) {
+    if(err) {
+      throw err;
+    }
+    res.json(serie);
+  })
+});
+
+//---->>>> POST SERIES VOTE <<<<----
+app.post('/voteseries', function(req, res) {
+  let vote = req.body;
+
+  VoteSeries.create(vote, function(err, votes) {
+    if(err) {
+      throw err;
+    }
+    res.json(votes);
+  })
+});
+
+//---->>>> GET USER SERIES VOTE <<<<----
+app.get('/voteseries/:id', function(req, res) {
+  let userID = req.params.id
+
+  VoteSeries.find({userID: userID}, function(err, votes) {
+    if(err) {
+      throw err;
+    }
+    res.json(votes);
   })
 });
 

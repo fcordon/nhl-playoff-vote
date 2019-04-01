@@ -1,11 +1,11 @@
 // Lib
 import React, { Component } from 'react'
-import { Grid, Col } from 'react-bootstrap'
+import { Container, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 // Actions
-import { getVote } from '../actions/VoteAction'
+import { getUserSeries } from '../actions/SeriesAction'
 
 // Components
 import UserVote from '../components/UserVote'
@@ -25,36 +25,34 @@ class Vote extends Component {
   }
 
   componentDidMount() {
-    this.props.getVote(this.state.userID)
-    this.props.userVote.length === 1 && this.setState({ isVoted: true })
+    this.props.getUserSeries(this.state.userID)
+    this.props.userSeries.length === 1 && this.setState({ isVoted: true })
   }
 
-  componentDidUpdate(prevState) {
-    if (prevState.userVote.length !== this.props.userVote.length) {
-      this.setState({ isVoted: true })
-    }
+  componentWillReceiveProps(nextProps) {
+    nextProps.userSeries.length !== 0 && this.setState({isVoted: true})
   }
 
   render() {
     return (
-      <Grid id='vote-form' fluid>
-        <Col xs={12}>
-          {this.state.isVoted ? this.props.userVote.map((vote, i) => <UserVote key={i} {...vote} />) : <FormVote />}
-        </Col>
-      </Grid>
+      <Container id='vote-form' fluid>
+        <Row>
+          {this.state.isVoted ? this.props.userSeries.map((vote, i) => <UserVote key={i} {...vote} match={i} />) : <FormVote />}
+        </Row>
+      </Container>
     )
   }
 }
 
 const mapStateToProps = state => {
   return {
-    userVote: state.vote.userVote
+    userSeries: state.series.userSeries
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    getVote
+    getUserSeries
   }, dispatch);
 }
 

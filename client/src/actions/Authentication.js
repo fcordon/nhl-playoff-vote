@@ -28,7 +28,7 @@ export const loginUser = (user, history) => dispatch => {
     dispatch(setCurrentUser(decoded));
     localStorage.setItem('userID', decoded.id);
     localStorage.setItem('userPseudo', decoded.pseudo);
-    history.push('/vote')
+    history.push('/classement')
   })
   .catch(err => {
     dispatch({type: GET_ERRORS, payload: err});

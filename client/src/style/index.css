@@ -1,5 +1,17 @@
+main {
+  padding-top: 30px;
+}
+
 .align-center {
   text-align: center;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.card {
+  margin-bottom: 30px;
 }
 
 ul li {
@@ -12,13 +24,13 @@ ul li {
   font-size: 12px;
 }
 
+.teams-logo {
+  width: 5vw;
+}
+
 #vote-form .nhl-logo {
   width: 5vw;
   margin-right: 30px;
-}
-
-.teams-logo {
-  width: 5vw;
 }
 
 #vote-form .form-checkbox {
@@ -30,6 +42,7 @@ ul li {
   color: #ff0000;
   font-weight: bold;
   font-size: 16px;
+  display: block;
 }
 
 #vote-form .valid-feedback {
@@ -42,6 +55,55 @@ ul li {
   padding: 10%;
   font-size: 20px;
   color: #fff;
+}
+
+#mon-compte ul li {
+  padding-bottom: 5px;
+}
+
+.navbar-brand {
+  padding-top: 0 !important;
+}
+
+.navbar-nav a {
+  font-size: 16px;
+  text-transform: uppercase;
+  padding-top: 5px;
+}
+
+.form-series {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  padding-bottom: 50px;
+}
+
+.form-series-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-series select {
+  padding: 0.5rem 20px !important;
+  font-size: 20px !important;
+}
+
+.series-teams-name {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.user-series-vote {
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  margin-bottom: 50px;
+}
+
+.user-series-vote-score {
+  font-size: 20px;
 }
 
 @media screen and (max-width: 812px) {
