@@ -6,6 +6,10 @@ main {
   text-align: center;
 }
 
+.font-bold {
+  font-weight: 700;
+}
+
 ul li {
   list-style-type: none;
 }
@@ -92,10 +96,6 @@ ul li {
 
 .user-series-vote-score {
   font-size: 20px;
-}
-
-.user-series-vote-bold {
-  font-weight: 700;
 }
 
 @media screen and (max-width: 812px) {
