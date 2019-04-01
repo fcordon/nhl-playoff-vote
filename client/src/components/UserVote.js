@@ -1,51 +1,43 @@
 import React, { Component } from 'react'
-import { Col, Panel } from 'react-bootstrap'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import { Card, Row, Col } from 'react-bootstrap'
 
-import { getTeams } from '../actions/TeamsAction'
+// Components
+import nhlLogo from '../images/nhl.svg'
 
-class UserVote extends Component {
-  constructor(props) {
-    super(props)
-
-    this.props.getTeams()
-  }
-
+export default class UserVote extends Component {
   render() {
-    const teamsSelected = (this.props.allTeams.map((team, i) => {
-      let teamsArray = this.props.teams
-      let teamsIndex = teamsArray.indexOf(team._id)
-
-      if (teamsIndex !== -1) return (<Col xs={12} md={4} key={i} className='user-vote-list-item'><img className="teams-logo" src={team.img} alt={team.name} /> {team.name}</Col>)
-      return true
-    }))
-
     return (
-      <Col xs={12} md={8} mdOffset={2} className='user-vote'>
-        <Panel>
-          <Panel.Heading>
-            <Panel.Title componentClass="h2">Voici ton vote pour les Playoffs</Panel.Title>
-          </Panel.Heading>
-          <Panel.Body className='user-vote-list'>
-            {teamsSelected}
-          </Panel.Body>
-        </Panel>
+      <Col xs={12} md={6}>
+        <Card>
+          <Card.Header>
+            <Card.Title>
+              <img className='nhl-logo' src={nhlLogo} alt='NHL Logo' />
+              Match {this.props.match + 1}
+            </Card.Title>
+          </Card.Header>
+          <Card.Body>
+            <Row className='user-series-vote align-center'>
+              <Col xs={6} md={4} className={this.props.team1.score === 4 && 'user-series-vote-score font-bold'}>
+                <img src={this.props.team1.img} alt={this.props.team1.name} />
+                <p>{this.props.team1.name}</p>
+              </Col>
+              <Col xs={3} md={1} className={this.props.team1.score === 4 ? 'user-series-vote-score font-bold' : 'user-series-vote-score'}>
+                {this.props.team1.score}
+              </Col>
+              <Col xs={12} md={2} className='user-series-vote-score'>
+                VS
+              </Col>
+              <Col xs={3} md={1} className={this.props.team2.score === 4 ? 'user-series-vote-score font-bold' : 'user-series-vote-score'}>
+                {this.props.team2.score}
+              </Col>
+              <Col xs={6} md={4} className={this.props.team2.score === 4 && 'user-series-vote-score font-bold'}>
+                <img src={this.props.team2.img} alt={this.props.team2.name} />
+                <p>{this.props.team2.name}</p>
+              </Col>
+            </Row>
+          </Card.Body>
+        </Card>
       </Col>
     )
   }
 }
-
-const mapStateToProps = state => {
-  return {
-    allTeams: state.teams.teams
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({
-    getTeams
-  }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserVote);

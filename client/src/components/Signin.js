@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Col, FormGroup, FormControl, Button, PanelGroup, Panel } from 'react-bootstrap';
+import { Container, Col, FormGroup, FormControl, Button, Card } from 'react-bootstrap';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import classnames from 'classnames';
@@ -44,44 +44,40 @@ class Signin extends Component {
   render() {
     const {errors} = this.state;
     return (
-      <Grid id="login" className="vertical-middle" fluid>
-        <Col xs={12} md={4} mdOffset={4}>
-          <PanelGroup id="signinPanel">
-            <Panel>
-              <Panel.Heading>
-                <Panel.Title componentClass="h2">Connecte toi</Panel.Title>
-              </Panel.Heading>
-              <Panel.Body>
-                <FormGroup controlId="email">
-                  <FormControl
-                    type='email'
-                    placeholder="Entre ton email"
-                    className={classnames('form-control form-control-lg', {
-                      'is-invalid': errors.email
-                    })}
-                    name="email"
-                    onChange={ this.handleInputChange }
-                    value={ this.state.email } />
-                  {errors.email && (<div className="invalid-feedback">{errors.email}</div>)}
-                </FormGroup>
-                <FormGroup controlId="password">
-                  <FormControl
-                    type='password'
-                    placeholder="Entre ton mot de passe"
-                    className={classnames('form-control form-control-lg', {
-                      'is-invalid': errors.password
-                    })}
-                    name="password"
-                    onChange={ this.handleInputChange }
-                    value={ this.state.password } />
-                  {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
-                </FormGroup>
-                <Button onClick={this.handleSubmit}>Envoyer</Button>
-              </Panel.Body>
-            </Panel>
-          </PanelGroup>
+      <Container id="login" className="vertical-middle" fluid>
+        <Col xs={12}  md={{ span: 4, offset: 4 }}>
+          <Card id="signinPanel">
+            <Card.Header><h3>Connecte toi</h3></Card.Header>
+            <Card.Body>
+              <FormGroup controlId="email">
+                <FormControl
+                  type='email'
+                  placeholder="Entre ton email"
+                  className={classnames('form-control form-control-lg', {
+                    'is-invalid': errors.email
+                  })}
+                  name="email"
+                  onChange={ this.handleInputChange }
+                  value={ this.state.email } />
+                {errors.email && (<div className="invalid-feedback">{errors.email}</div>)}
+              </FormGroup>
+              <FormGroup controlId="password">
+                <FormControl
+                  type='password'
+                  placeholder="Entre ton mot de passe"
+                  className={classnames('form-control form-control-lg', {
+                    'is-invalid': errors.password
+                  })}
+                  name="password"
+                  onChange={ this.handleInputChange }
+                  value={ this.state.password } />
+                {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
+              </FormGroup>
+              <Button onClick={this.handleSubmit}>Envoyer</Button>
+            </Card.Body>
+          </Card>
         </Col>
-      </Grid>
+      </Container>
     )
   }
 }
