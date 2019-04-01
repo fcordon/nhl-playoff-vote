@@ -20,6 +20,10 @@ ul li {
   font-size: 12px;
 }
 
+#mon-compte ul li {
+  padding-bottom: 10px;
+}
+
 #vote-form .nhl-logo {
   width: 5vw;
   margin-right: 30px;

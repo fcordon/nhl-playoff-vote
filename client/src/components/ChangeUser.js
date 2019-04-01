@@ -36,7 +36,7 @@ class ChangeUser extends Component {
 
   render() {
     return (
-      <Col xs={12} md={{ span: 6, offset: 3 }}>
+      <Col xs={12} md={{ span: 4, offset: 4 }}>
         <Card>
           <Card.Header>
             <Card.Title>Modifie tes informations de compte</Card.Title>
@@ -87,10 +87,10 @@ class ChangeUser extends Component {
                 <li><p>Attention tu seras déconnecté automatiquement afin de faire la mise à jour. Il faudra te connecter à nouveau.</p></li>
               </ul> :
               <ul>
-                <li>nom : {this.props.nom}</li>
-                <li>prénom : {this.props.prenom}</li>
-                <li>pseudo : {this.props.pseudo}</li>
-                <li>email : {this.props.email}</li>
+                <li>Nom : {this.props.nom}</li>
+                <li>Prénom : {this.props.prenom}</li>
+                <li>Pseudo : {this.props.pseudo}</li>
+                <li>Email : {this.props.email}</li>
                 <li><Button onClick={this.modifyUser.bind(this)}>Modifier</Button></li>
               </ul>
             }

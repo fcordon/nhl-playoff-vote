@@ -75,6 +75,16 @@ app.get('/series', function(req, res) {
   })
 });
 
+//---->>>> GET ALL USER SERIES <<<<----
+app.get('/voteseries', function(req, res) {
+  VoteSeries.find({}, function(err, voteSerie) {
+    if(err) {
+      throw err;
+    }
+    res.json(voteSerie);
+  })
+});
+
 //---->>>> POST SERIES VOTE <<<<----
 app.post('/voteseries', function(req, res) {
   let vote = req.body;
