@@ -1,6 +1,6 @@
 // Lib
 import React, { Component } from 'react'
-import { Card, Col } from 'react-bootstrap'
+import { Card, Row, Col } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -27,7 +27,9 @@ class DisplayVote extends Component {
           <Card.Title>Vote de {this.props.userPseudo}</Card.Title>
         </Card.Header>
         <Card.Body className='user-vote-list'>
-          {teamsSelected}
+          <Row>
+            {teamsSelected}
+          </Row>
         </Card.Body>
       </Card>
     )
