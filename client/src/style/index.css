@@ -6,8 +6,16 @@ main {
   text-align: center;
 }
 
+.align-left {
+  text-align: left;
+}
+
+.align-right {
+  text-align: right;
+}
+
 .font-bold {
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .card {
@@ -99,7 +107,6 @@ ul li {
   justify-content: center;
   align-items: center;
   font-size: 16px;
-  margin-bottom: 50px;
 }
 
 .user-series-vote-score {
