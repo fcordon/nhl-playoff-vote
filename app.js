@@ -58,10 +58,11 @@ app.get('/', (req, res) => {
 //---->>>> GET TEAMS <<<<----
 app.get('/teams', function(req, res) {
   Teams.find({}, function(err, team) {
+    const sortTeams = team.sort((a,b) => a.name < b.name)
     if(err) {
       throw err;
     }
-    res.json(team);
+    res.json(sortTeams);
   })
 });
 
@@ -72,6 +73,28 @@ app.get('/series', function(req, res) {
       throw err;
     }
     res.json(serie);
+  })
+});
+
+//---->>>> POST NHL SERIES <<<<----
+app.post('/series', function(req, res) {
+  let series = req.body;
+
+  Series.create(series, function(err, serie) {
+    if(err) {
+      throw err;
+    }
+    res.json(serie);
+  })
+});
+
+//---->>>> GET ALL USER SERIES <<<<----
+app.get('/voteseries', function(req, res) {
+  VoteSeries.find({}, function(err, voteSerie) {
+    if(err) {
+      throw err;
+    }
+    res.json(voteSerie);
   })
 });
 

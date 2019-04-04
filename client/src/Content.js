@@ -7,6 +7,7 @@ import Vote from "./components/Vote"
 import Classement from "./components/Classement"
 import AllVote from "./components/AllVote"
 import MonCompte from "./components/MonCompte"
+import FormSeries from "./components/FormSeries"
 
 const Main = () => (
   <main>
@@ -17,6 +18,7 @@ const Main = () => (
       <Route path='/classement' component={Classement}/>
       <Route path='/quiavotequoi' component={AllVote}/>
       <Route path='/monCompte' component={MonCompte}/>
+      <Route path='/series' component={FormSeries}/>
     </Switch>
   </main>
 )
