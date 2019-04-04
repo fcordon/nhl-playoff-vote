@@ -1,5 +1,6 @@
 const initialeState = {
   series: [],
+  nhlSeries: [],
   voteSeries: [],
   userSeries: [],
   allUserSeries: [],
@@ -11,6 +12,11 @@ export const SeriesReducer = (state=initialeState, action) => {
     case 'GET_SERIES':
       return {...state, series:[...action.payload]};
     case "GET_SERIES_REJECTED":
+      return action.payload
+
+    case 'POST_NHL_SERIES':
+      return {...state, nhlSeries:[...action.payload]}
+    case "POST_NHL_SERIES_REJECTED":
       return action.payload
 
     case 'POST_SERIES':

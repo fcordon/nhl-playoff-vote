@@ -12,6 +12,18 @@ export function getSeries() {
   }
 }
 
+export function postNhlSeries(series) {
+  return function(dispatch) {
+    axios.post('/series', series)
+    .then(function(response) {
+      dispatch({type:"POST_NHL_SERIES", payload:response.data})
+    })
+    .catch(function(err) {
+      dispatch({type:"POST_NHL_SERIES_REJECTED", payload:err})
+    })
+  }
+}
+
 export function postSeries(vote) {
   return function(dispatch) {
     axios.post('/voteseries', vote)

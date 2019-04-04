@@ -10,6 +10,10 @@ main {
   font-weight: 700;
 }
 
+.card {
+  margin-bottom: 30px;
+}
+
 ul li {
   list-style-type: none;
 }

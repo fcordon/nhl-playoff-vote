@@ -11,7 +11,6 @@ class Classement extends Component {
   constructor(props) {
     super(props)
     let userPseudo = localStorage.getItem("userPseudo")
-    let userID = localStorage.getItem("userID")
 
     this.props.getAllClassement()
     this.props.getSeries()
@@ -19,8 +18,10 @@ class Classement extends Component {
 
     this.state = {
       userPseudo: userPseudo,
-      userID: userID,
-      isAdmin: false
+      isAdmin: false,
+      usersID: [],
+      usersPoints: [],
+      series: []
     }
   }
 
@@ -29,30 +30,41 @@ class Classement extends Component {
   }
 
   getPoints() {
-    this.props.allClassement.map((user, i) => {
-      let userID = user.userID
-      let userPoints = user.points
+    this.props.allClassement.map((classement, i) => {
+      this.state.usersID.push(classement.userID)
+      this.state.usersPoints.push(classement.points)
+      return [this.state.usersID, this.state.usersPoints]
+    })
 
-      this.props.allUserSeries.map((vote, i) => {
-        let seriesID = vote.seriesId
-        let seriesWinner = vote.winner
-        let seriesDiff = vote.diff
+    this.props.series.map((serie, i) => {
+      this.state.series.push(serie._id)
+      return this.state.series
+    })
 
-        if(vote.userID === userID) {
-          this.props.series.map((serie, i) => {
-            if(serie._id === seriesID) {
-              if(seriesWinner === serie.winner && seriesDiff === serie.diff) {
-                userPoints = userPoints + 3
-              } else if(seriesWinner === serie.winner) {
-                userPoints = userPoints + 1
-              }
-            }
-            return userPoints
-          })
-          // Update Classement Points here !!!!
-        }
-        return seriesID
-      })
+    this.props.allUserSeries.map((vote, i) => {
+      let userIndex = this.state.usersID.indexOf(vote.userID)
+      let userPoints = this.state.usersPoints[userIndex]
+      let seriesIndex = this.state.series.indexOf(vote.seriesId)
+
+      if(this.props.series[seriesIndex].winner === vote.winner && this.props.series[seriesIndex].diff === vote.diff) {
+        const newArray = this.state.usersPoints
+        const newItem = userPoints + 3
+        newArray[userIndex] = newItem
+
+        this.setState({
+          usersPoints: newArray
+        })
+      } else if(this.props.series[seriesIndex].winner === vote.winner) {
+        const newArray = this.state.usersPoints
+        const newItem = userPoints + 1
+        newArray[userIndex] = newItem
+
+        this.setState({
+          usersPoints: newArray
+        })
+      }
+
+      console.log('userPoints : ', userPoints)
       return userPoints
     })
   }
