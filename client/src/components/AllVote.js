@@ -5,18 +5,20 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 // Actions
-import { getVote, getAllVote } from '../actions/VoteAction'
+import { getUserSeries, getAllUserSeries } from '../actions/SeriesAction'
+import { getAllClassement } from '../actions/ClassementAction'
 
 //Components
 import DisplayVote from './DisplayVote'
 
-class Vote extends Component {
+class AllVote extends Component {
 
   constructor(props) {
     super(props)
 
-    this.props.getVote(localStorage.getItem("userID"))
-    this.props.getAllVote()
+    this.props.getUserSeries(localStorage.getItem("userID"))
+    this.props.getAllUserSeries()
+    this.props.getAllClassement()
 
     this.state = {
       isVoted: false
@@ -24,11 +26,11 @@ class Vote extends Component {
   }
 
   componentDidMount() {
-    this.props.userVote.length === 1 && this.setState({ isVoted: true })
+    this.props.userVote.length > 0 && this.setState({ isVoted: true })
   }
 
   componentDidUpdate(prevState) {
-    if (prevState.userVote.length !== this.props.userVote.length) {
+    if (prevState.allVote.length !== this.props.allVote.length) {
       this.setState({ isVoted: true })
     }
   }
@@ -37,7 +39,7 @@ class Vote extends Component {
     return (
       <Container id='vote-form' fluid>
         <Col xs={12}>
-          {this.state.isVoted ? this.props.allVote.map((votes, i) => <DisplayVote key={i} {...votes}/>) : <p>Il faut que tu vote d'abord !</p>}
+          {this.state.isVoted ? this.props.classement.map((users, i) => <DisplayVote key={i} {...users}/>) : <p>Il faut que tu vote d'abord !</p>}
         </Col>
       </Container>
     )
@@ -46,15 +48,17 @@ class Vote extends Component {
 
 const mapStateToProps = state => {
   return {
-    userVote: state.vote.userVote,
-    allVote: state.vote.allVote
+    userVote: state.series.userSeries,
+    classement: state.classement.allClassement,
+    allVote: state.series.allUserSeries
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    getVote, getAllVote
+    getUserSeries, getAllUserSeries,
+    getAllClassement
   }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Vote);
+export default connect(mapStateToProps, mapDispatchToProps)(AllVote);
