@@ -32,7 +32,7 @@ class FullNavbars extends Component {
             <Nav.Link eventKey={1}>Classement</Nav.Link>
           </LinkContainer>
           <LinkContainer to={"/quiavotequoi"}>
-            <Nav.Link eventKey={2}>Qui a voté quoi !</Nav.Link>
+            <Nav.Link eventKey={2}>Qui à voté quoi !</Nav.Link>
           </LinkContainer>
         </Nav>
         <Nav>

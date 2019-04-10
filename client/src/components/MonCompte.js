@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Container, Col, Button } from 'react-bootstrap'
+import { Container, Col } from 'react-bootstrap'
 
 import { getUser } from '../actions/Authentication'
-import { getAllVote } from '../actions/VoteAction'
-import { updateClassement } from '../actions/ClassementAction'
 
 import ChangeUser from '../components/ChangeUser'
 
@@ -19,45 +17,12 @@ export class MonCompte extends Component {
     this.state = {
       userPseudo: userPseudo,
       userID: userID,
-      modifyName: false,
-      isAdmin: false,
-      qualifying: ['5c17bb3bc7924a0b36b6de73',
-      '5c17bb3bc7924a0b36b6de6c',
-      '5c17bb3bc7924a0b36b6de74',
-      '5c17bb3bc7924a0b36b6de68',
-      '5c17bb3bc7924a0b36b6de70',
-      '5c17bb3bc7924a0b36b6de6b',
-      '5c17bb3bc7924a0b36b6de81',
-      '5c17bb3bc7924a0b36b6de71',
-      '5c17bb3bc7924a0b36b6de79',
-      '5c17bb3bc7924a0b36b6de80',
-      '5c17bb3bc7924a0b36b6de83',
-      '5c17bb3bc7924a0b36b6de77',
-      '5c17bb3bc7924a0b36b6de78',
-      '5c17bb3bc7924a0b36b6de85',
-      '5c17bb3bc7924a0b36b6de7e',
-      '5c17bb3bc7924a0b36b6de7a']
+      modifyName: false
     }
   }
 
   componentDidMount() {
-    const userID = this.state.userID
-    this.props.getUser({ id: userID })
-    this.props.getAllVote()
-    this.state.userPseudo === 'C Fab' && this.setState({ isAdmin: true })
-  }
-
-  getPoints() {
-    this.props.allVote.map((vote, i) => {
-      let points = 0
-      vote.teams.map((team, i) => {
-        let teamsMatch = this.state.qualifying.indexOf(team)
-        if(teamsMatch !== -1) points = points + 1
-        return points
-      })
-      this.props.updateClassement(vote.userID, {'points':points})
-      return points
-    })
+    this.props.getUser({ id: this.state.userID })
   }
 
   render() {
@@ -67,7 +32,6 @@ export class MonCompte extends Component {
           <h1 className="align-center">Voici ton compte {this.state.userPseudo}</h1>
           {this.props.userData.map((user, i) => <ChangeUser key={i} {...user} />)}
         </Col>
-        {this.state.isAdmin ? <Col xs={12} className="align-center"><Button onClick={this.getPoints.bind(this)}>Calculer les points</Button></Col> : null}
       </Container>
     )
   }
@@ -75,16 +39,13 @@ export class MonCompte extends Component {
 
 function mapStateToProps(state){
   return {
-    userData: state.auth.user,
-    allVote: state.vote.allVote
+    userData: state.auth.user
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    getUser,
-    getAllVote,
-    updateClassement
+    getUser
   }, dispatch)
 }
 

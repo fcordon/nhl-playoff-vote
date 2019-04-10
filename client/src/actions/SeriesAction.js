@@ -12,6 +12,18 @@ export function getSeries() {
   }
 }
 
+export function postNhlSeries(series) {
+  return function(dispatch) {
+    axios.post('/series', series)
+    .then(function(response) {
+      dispatch({type:"POST_NHL_SERIES", payload:response.data})
+    })
+    .catch(function(err) {
+      dispatch({type:"POST_NHL_SERIES_REJECTED", payload:err})
+    })
+  }
+}
+
 export function postSeries(vote) {
   return function(dispatch) {
     axios.post('/voteseries', vote)
@@ -20,6 +32,18 @@ export function postSeries(vote) {
     })
     .catch(function(err) {
       dispatch({type:"POST_SERIES_REJECTED", payload:err})
+    })
+  }
+}
+
+export function getAllUserSeries() {
+  return function(dispatch) {
+    axios.get('/voteseries')
+    .then(function(response) {
+      dispatch({type:"GET_ALL_USER_SERIES_VOTE", payload:response.data})
+    })
+    .catch(function(err) {
+      dispatch({type:"GET_ALL_USER_SERIES_VOTE_REJECTED", payload:err})
     })
   }
 }

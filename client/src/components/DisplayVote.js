@@ -1,47 +1,28 @@
 // Lib
 import React, { Component } from 'react'
-import { Card, Row, Col } from 'react-bootstrap'
+import { Row, Col, Card } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { getTeams } from '../actions/TeamsAction'
+import { getAllUserSeries } from '../actions/SeriesAction'
 
 class DisplayVote extends Component {
   constructor(props) {
     super(props)
 
-    this.props.getTeams()
-
-    this.state = {
-      qualifying: ['5c17bb3bc7924a0b36b6de73',
-      '5c17bb3bc7924a0b36b6de6c',
-      '5c17bb3bc7924a0b36b6de74',
-      '5c17bb3bc7924a0b36b6de68',
-      '5c17bb3bc7924a0b36b6de70',
-      '5c17bb3bc7924a0b36b6de6b',
-      '5c17bb3bc7924a0b36b6de81',
-      '5c17bb3bc7924a0b36b6de71',
-      '5c17bb3bc7924a0b36b6de79',
-      '5c17bb3bc7924a0b36b6de80',
-      '5c17bb3bc7924a0b36b6de83',
-      '5c17bb3bc7924a0b36b6de77',
-      '5c17bb3bc7924a0b36b6de78',
-      '5c17bb3bc7924a0b36b6de85',
-      '5c17bb3bc7924a0b36b6de7e',
-      '5c17bb3bc7924a0b36b6de7a']
-    }
+    this.props.getAllUserSeries()
   }
 
   render() {
-    const teamsSelected = (this.props.allTeams.map((team, i) => {
-      let teamsArray = this.props.teams
-      let teamsIndex = teamsArray.indexOf(team._id)
-      let teamsQualifying = this.state.qualifying.indexOf(team._id)
-
-      if (teamsIndex !== -1 && teamsQualifying !== -1) {
-        return (<Col xs={12} md={4} key={i} className='user-vote-list-item qualifying'><img className="teams-logo" src={team.img} alt={team.name} /> {team.name}</Col>)
-      } else if (teamsIndex !== -1) {
-        return (<Col xs={12} md={4} key={i} className='user-vote-list-item'><img className="teams-logo" src={team.img} alt={team.name} /> {team.name}</Col>)
+    const usersVote = (this.props.allVote.map((votes, i) => {
+      if (votes.userID === this.props.userID) {
+        return (
+          <Col xs={12} md={6} key={i} className='align-center'>
+            <p>
+              <img src={votes.team1.img} alt={votes.team1.name} width='25%' /> &nbsp;&nbsp; <span className={votes.team1.score === 4 ? 'font-bold' : ''}>{votes.team1.score}</span> &nbsp;&nbsp; Vs &nbsp;&nbsp; <span className={votes.team2.score === 4 ? 'font-bold' : ''}>{votes.team2.score}</span> &nbsp;&nbsp; <img src={votes.team2.img} alt={votes.team2.name} width='25%' />
+            </p>
+          </Col>
+        )
       }
       return true
     }))
@@ -50,9 +31,9 @@ class DisplayVote extends Component {
         <Card.Header>
           <Card.Title>Vote de {this.props.userPseudo}</Card.Title>
         </Card.Header>
-        <Card.Body className='user-vote-list'>
+        <Card.Body>
           <Row>
-            {teamsSelected}
+            {usersVote}
           </Row>
         </Card.Body>
       </Card>
@@ -62,13 +43,13 @@ class DisplayVote extends Component {
 
 const mapStateToProps = state => {
   return {
-    allTeams: state.teams.teams
+    allVote: state.series.allUserSeries
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    getTeams
+    getAllUserSeries
   }, dispatch);
 }
 

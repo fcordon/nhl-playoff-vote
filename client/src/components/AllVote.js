@@ -5,23 +5,41 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 // Actions
-import { getAllVote } from '../actions/VoteAction'
+import { getUserSeries, getAllUserSeries } from '../actions/SeriesAction'
+import { getAllClassement } from '../actions/ClassementAction'
 
 //Components
 import DisplayVote from './DisplayVote'
 
-class Vote extends Component {
+class AllVote extends Component {
 
   constructor(props) {
     super(props)
-    this.props.getAllVote()
+
+    this.props.getUserSeries(localStorage.getItem("userID"))
+    this.props.getAllUserSeries()
+    this.props.getAllClassement()
+
+    this.state = {
+      isVoted: false
+    }
+  }
+
+  componentDidMount() {
+    this.props.userVote.length > 0 && this.setState({ isVoted: true })
+  }
+
+  componentDidUpdate(prevState) {
+    if (prevState.allVote.length !== this.props.allVote.length) {
+      this.setState({ isVoted: true })
+    }
   }
 
   render() {
     return (
       <Container id='all-votes' fluid>
         <Col xs={12}>
-          {this.props.allVote.map((votes, i) => <DisplayVote key={i} {...votes}/>)}
+          {this.state.isVoted ? this.props.classement.map((users, i) => <DisplayVote key={i} {...users}/>) : <p>Il faut que tu vote d'abord !</p>}
         </Col>
       </Container>
     )
@@ -30,14 +48,17 @@ class Vote extends Component {
 
 const mapStateToProps = state => {
   return {
-    allVote: state.vote.allVote
+    userVote: state.series.userSeries,
+    classement: state.classement.allClassement,
+    allVote: state.series.allUserSeries
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    getAllVote
+    getUserSeries, getAllUserSeries,
+    getAllClassement
   }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Vote);
+export default connect(mapStateToProps, mapDispatchToProps)(AllVote);
