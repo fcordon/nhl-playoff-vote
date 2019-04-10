@@ -28,6 +28,9 @@ class FullNavbars extends Component {
     const authNav = (
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
+        <LinkContainer to={"/vote"}>
+          <Nav.Link eventKey={0}>Mon vote !</Nav.Link>
+        </LinkContainer>
           <LinkContainer to={"/classement"}>
             <Nav.Link eventKey={1}>Classement</Nav.Link>
           </LinkContainer>
