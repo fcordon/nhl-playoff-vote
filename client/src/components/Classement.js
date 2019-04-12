@@ -65,23 +65,25 @@ class Classement extends Component {
       }
 
       console.log('userPoints : ', userPoints)
+      this.props.updateClassement(vote.userID, {provisoire:userPoints})
       return userPoints
     })
   }
 
   render() {
     return (
-      <Col xs={12} md={{ span: 4, offset: 4 }} className='align-center'>
+      <Col xs={12} md={{ span: 5, offset: 3 }} className='align-center'>
         <Table striped bordered hover responsive>
           <thead>
             <tr>
               <th className='align-center'>Classement</th>
               <th className='align-center'>Pseudo</th>
               <th className='align-center'>Points</th>
+              <th className='align-center'>Points provisoire</th>
             </tr>
           </thead>
           <tbody>
-            {this.props.allClassement.map((stand, i) => <tr key={i}><td>{i + 1}</td><td>{stand.userPseudo}</td><td>{stand.points}</td></tr>)}
+            {this.props.allClassement.map((stand, i) => <tr key={i}><td>{i + 1}</td><td>{stand.userPseudo}</td><td>{stand.points}</td><td>{stand.provisoire}</td></tr>)}
           </tbody>
         </Table>
         {this.state.isAdmin ? <Col xs={12} className="align-center"><Button onClick={this.getPoints.bind(this)}>Calculer les points</Button></Col> : null}

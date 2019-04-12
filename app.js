@@ -174,7 +174,7 @@ app.get('/classement', function(req, res) {
     if(err) {
       throw err;
     }
-    const newClassement = classement.sort((a,b) => a.points < b.points)
+    const newClassement = classement.sort((a,b) => a.provisoire < b.provisoire)
     res.json(newClassement);
   })
 });
@@ -197,7 +197,7 @@ app.put('/classement/:_id', function(req, res) {
 
   let update = {
     '$set': {
-      points: newData.points
+      provisoire: newData.provisoire
     }
   };
 
