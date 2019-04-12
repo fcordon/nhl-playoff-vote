@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux'
 
 // Actions
 import { getUserSeries } from '../actions/SeriesAction'
+import { getSeries } from '../actions/SeriesAction'
 
 // Components
 import UserVote from '../components/UserVote'
@@ -37,7 +38,7 @@ class Vote extends Component {
     return (
       <Container id='vote-form' fluid>
         <Row>
-          {this.state.isVoted ? this.props.userSeries.map((vote, i) => <UserVote key={i} {...vote} match={i} />) : <FormVote />}
+          {this.state.isVoted ? this.props.userSeries.map((vote, i) => <UserVote key={i} {...vote} match={i} series={this.props.series} />) : <FormVote />}
         </Row>
       </Container>
     )
@@ -46,13 +47,14 @@ class Vote extends Component {
 
 const mapStateToProps = state => {
   return {
-    userSeries: state.series.userSeries
+    userSeries: state.series.userSeries,
+    series: state.series.series
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators({
-    getUserSeries
+    getUserSeries, getSeries
   }, dispatch);
 }
 
