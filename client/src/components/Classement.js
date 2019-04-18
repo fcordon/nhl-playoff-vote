@@ -64,7 +64,6 @@ class Classement extends Component {
         })
       }
 
-      console.log('userPoints : ', userPoints)
       this.props.updateClassement(vote.userID, {provisoire:userPoints})
       return userPoints
     })

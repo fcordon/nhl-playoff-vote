@@ -19,6 +19,17 @@ export const SeriesReducer = (state=initialeState, action) => {
     case "POST_NHL_SERIES_REJECTED":
       return action.payload
 
+    case "UPDATE_SERIES":
+      const newArray = [...state.series]
+      const newItem = action.datas
+      newArray[newArray.findIndex(item => item._id === action.id)] = newItem
+      return {
+        ...state,
+        series:newArray
+      };
+    case "UPDATE_SERIES_REJECTED":
+      return action.payload
+
     case 'POST_SERIES':
       return {...state, voteSeries:[...action.payload]}
     case "POST_SERIES_REJECTED":

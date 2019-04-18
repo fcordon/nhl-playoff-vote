@@ -12,7 +12,8 @@ class FullNavbars extends Component {
     super(props)
 
     this.state = {
-      isAuthenticated: localStorage.getItem('jwtToken') !== null ? true : false
+      isAuthenticated: localStorage.getItem('jwtToken') !== null ? true : false,
+      isAdmin: localStorage.getItem('userPseudo')
     }
   }
 
@@ -39,6 +40,16 @@ class FullNavbars extends Component {
           </LinkContainer>
         </Nav>
         <Nav>
+          {this.state.isAdmin === 'C Fab' &&
+            <LinkContainer to={"/series"}>
+              <Nav.Link eventKey={5}>Ajouter series</Nav.Link>
+            </LinkContainer>
+          }
+          {this.state.isAdmin === 'C Fab' &&
+            <LinkContainer to={"/updateseries"}>
+              <Nav.Link eventKey={6}>Update series</Nav.Link>
+            </LinkContainer>
+          }
           <LinkContainer to={"/monCompte"}>
             <Nav.Link eventKey={3}>Mon Compte</Nav.Link>
           </LinkContainer>

@@ -24,6 +24,18 @@ export function postNhlSeries(series) {
   }
 }
 
+export function updateSeries(id, newData) {
+  return function(dispatch) {
+    axios.put('/series/' + id, newData)
+    .then(function(response) {
+      dispatch({type:"UPDATE_SERIES", payload:response.data, id:id, datas:newData})
+    })
+    .catch(function(err) {
+      dispatch({type:"UPDATE_SERIES_REJECTED", payload:err})
+    })
+  }
+}
+
 export function postSeries(vote) {
   return function(dispatch) {
     axios.post('/voteseries', vote)
