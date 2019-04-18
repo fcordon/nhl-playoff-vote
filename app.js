@@ -88,6 +88,29 @@ app.post('/series', function(req, res) {
   })
 });
 
+//---->>>> UPDATE SERIES <<<<----
+app.put('/series/:_id', function(req, res) {
+  let newData = req.body
+
+  let update = {
+    '$set': {
+      team1: newData.team1,
+      team2: newData.team2,
+      winner: newData.winner,
+      diff: newData.diff
+    }
+  };
+
+  let options = {new: false};
+
+  Series.updateOne({_id: req.params._id}, update, options, function(err, data) {
+    if(err) {
+      throw err;
+    }
+    res.json(data);
+  })
+});
+
 //---->>>> GET ALL USER SERIES <<<<----
 app.get('/voteseries', function(req, res) {
   VoteSeries.find({}, function(err, voteSerie) {
