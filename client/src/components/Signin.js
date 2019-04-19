@@ -15,14 +15,19 @@ class Signin extends Component {
       password: '',
       errors: {}
     }
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.checkKey = this.checkKey.bind(this)
   }
 
   handleInputChange(e) {
     this.setState({
       [e.target.name]: e.target.value
     })
+  }
+
+  checkKey(e) {
+    if(e.key === 'Enter') this.handleSubmit()
   }
 
   handleSubmit() {
@@ -70,6 +75,7 @@ class Signin extends Component {
                   })}
                   name="password"
                   onChange={ this.handleInputChange }
+                  onKeyPress={ this.checkKey }
                   value={ this.state.password } />
                 {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
               </FormGroup>
