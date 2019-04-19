@@ -1,7 +1,6 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 
-import Signup from "./components/Signup"
 import Signin from "./components/Signin"
 import Vote from "./components/Vote"
 import Classement from "./components/Classement"
@@ -13,8 +12,7 @@ import UpdateSeries from "./components/UpdateSeries"
 const Main = () => (
   <main>
     <Switch>
-      <Route exact path='/' component={Signup}/>
-      <Route path='/signin' component={Signin}/>
+      <Route exact path='/' component={Signin}/>
       <Route path='/vote' component={Vote}/>
       <Route path='/classement' component={Classement}/>
       <Route path='/quiavotequoi' component={AllVote}/>
