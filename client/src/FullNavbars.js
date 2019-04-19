@@ -13,12 +13,14 @@ class FullNavbars extends Component {
 
     this.state = {
       isAuthenticated: localStorage.getItem('jwtToken') !== null ? true : false,
-      isAdmin: localStorage.getItem('userPseudo')
+      isAdmin: localStorage.getItem('userPseudo') === 'C Fab' ? true : false
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.auth.isAuthenticated === true) this.setState({isAuthenticated: true})
+    nextProps.auth.isAuthenticated === true && this.setState({isAuthenticated: true})
+    nextProps.auth.user[0].pseudo === 'C Fab' && this.setState({isAdmin: true})
+    console.log(nextProps)
   }
 
   onLogout() {
@@ -40,12 +42,12 @@ class FullNavbars extends Component {
           </LinkContainer>
         </Nav>
         <Nav>
-          {this.state.isAdmin === 'C Fab' &&
+          {this.state.isAdmin &&
             <LinkContainer to={"/series"}>
               <Nav.Link eventKey={5}>Ajouter series</Nav.Link>
             </LinkContainer>
           }
-          {this.state.isAdmin === 'C Fab' &&
+          {this.state.isAdmin &&
             <LinkContainer to={"/updateseries"}>
               <Nav.Link eventKey={6}>Update series</Nav.Link>
             </LinkContainer>

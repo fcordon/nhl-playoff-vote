@@ -7,6 +7,16 @@ import westernLogo from '../images/Western_Conference.png'
 
 export default class UserVote extends Component {
   render() {
+    const reasultSeries = this.props.series.map((serie, i) => {
+      let team1Name = serie.team1.name
+      let team1Score = serie.team1.score
+      let team2Name = serie.team2.name
+      let team2Score = serie.team2.score
+
+      return (
+        serie._id === this.props.seriesId && <p key={i}><span className={team1Score > team2Score ? 'font-bold' : null}>{team1Name}&nbsp;{team1Score}</span> - <span className={team1Score < team2Score ? 'font-bold' : null}>{team2Score}&nbsp;{team2Name}</span></p>
+      )
+    })
     return (
       <Col xs={12} md={6} lg={3}>
         <Card>
@@ -35,17 +45,7 @@ export default class UserVote extends Component {
             </Row>
             <Row>
               <Col className='align-center'>
-                {
-                  this.props.series.map((serie, i) => {
-                    let result = ''
-
-                    if(serie._id === this.props.seriesId) {
-                      result = 'Résultat : '+ serie.team1.name + '  ' + serie.team1.score +' - '+ serie.team2.score +'  '+ serie.team2.name
-                    }
-
-                    return <p key={i}>{result}</p>
-                  })
-                }
+                {reasultSeries}
               </Col>
             </Row>
           </Card.Body>

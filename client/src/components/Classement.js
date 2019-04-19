@@ -10,15 +10,15 @@ import { updateClassement } from '../actions/ClassementAction'
 class Classement extends Component {
   constructor(props) {
     super(props)
-    let userPseudo = localStorage.getItem("userPseudo")
 
     this.props.getAllClassement()
     this.props.getSeries()
     this.props.getAllUserSeries()
 
     this.state = {
-      userPseudo: userPseudo,
+      userPseudo: localStorage.getItem("userPseudo"),
       isAdmin: false,
+      isLoading: false,
       usersID: [],
       usersPoints: [],
       series: []
@@ -36,10 +36,7 @@ class Classement extends Component {
       return [this.state.usersID, this.state.usersPoints]
     })
 
-    this.props.series.map((serie, i) => {
-      this.state.series.push(serie._id)
-      return this.state.series
-    })
+    this.props.series.map((serie, i) => this.state.series.push(serie._id))
 
     this.props.allUserSeries.map((vote, i) => {
       let userIndex = this.state.usersID.indexOf(vote.userID)
@@ -85,7 +82,8 @@ class Classement extends Component {
             {this.props.allClassement.map((stand, i) => <tr key={i}><td>{i + 1}</td><td>{stand.userPseudo}</td><td>{stand.points}</td><td>{stand.provisoire}</td></tr>)}
           </tbody>
         </Table>
-        {this.state.isAdmin ? <Col xs={12} className="align-center"><Button onClick={this.getPoints.bind(this)}>Calculer les points</Button></Col> : null}
+        {this.state.isAdmin && <Col xs={12} className="align-center"><Button onClick={this.getPoints.bind(this)}>Calculer les points</Button></Col>}
+        {this.state.isLoading && <div className="lds-ring"><div></div><div></div><div></div><div></div></div>}
       </Col>
     )
   }
