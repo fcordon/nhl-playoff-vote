@@ -52,11 +52,7 @@ require('./passport')(passport);
 app.use('/', users);
 
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build/index.html'), function(err) {
-    if (err) {
-      res.status(500).send(err)
-    }
-  });
+  res.sendFile(path.resolve(__dirname + 'client/build/index.html'))
 });
 
 //---->>>> GET TEAMS <<<<----
