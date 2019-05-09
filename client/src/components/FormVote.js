@@ -88,7 +88,7 @@ class FormVote extends Component {
                   this.props.series.map((serie, i) => {
                     return(
                       <Row key={i} className='form-series'>
-                        <Col xs={12} className='align-center'><h3>Match {i + 1}</h3></Col>
+                        <Col xs={12} className='align-center'><h3>Finale de conférence {i === 0 ? 'Est' : 'Ouest'}</h3></Col>
                         <Col xs={12} md={4} lg={3} className='form-series-col'>
                           <Col xs={6} md={8} className='align-center'>
                             <img src={serie.team1.img} alt={serie.team1.name} />
