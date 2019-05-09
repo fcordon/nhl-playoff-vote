@@ -78,7 +78,7 @@ class FormVote extends Component {
           <Card.Header>
             <Card.Title>
               <img className='nhl-logo' src={nhlLogo} alt='NHL Logo' />
-              C'est le moment de voter pour les series - 2<sup>nd</sup> round
+              C'est le moment de voter pour les finales de conférence
             </Card.Title>
           </Card.Header>
           <Card.Body>
