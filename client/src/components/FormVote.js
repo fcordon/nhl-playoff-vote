@@ -78,7 +78,7 @@ class FormVote extends Component {
           <Card.Header>
             <Card.Title>
               <img className='nhl-logo' src={nhlLogo} alt='NHL Logo' />
-              C'est le moment de voter pour les series - 2<sup>nd</sup> round
+              C'est le moment de voter pour les finales de conférence
             </Card.Title>
           </Card.Header>
           <Card.Body>
@@ -88,7 +88,7 @@ class FormVote extends Component {
                   this.props.series.map((serie, i) => {
                     return(
                       <Row key={i} className='form-series'>
-                        <Col xs={12} className='align-center'><h3>Finale de conférence {i === 0 ? 'Est' : 'Ouest'}</h3></Col>
+                        <Col xs={12} className='align-center'><h3>Finale de Conférence {i === 0 ? 'Est' : 'Ouest'}</h3></Col>
                         <Col xs={12} md={4} lg={3} className='form-series-col'>
                           <Col xs={6} md={8} className='align-center'>
                             <img src={serie.team1.img} alt={serie.team1.name} />
