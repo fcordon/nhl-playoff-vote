@@ -18,7 +18,7 @@ export default class UserVote extends Component {
       )
     })
     return (
-      <Col xs={12} md={6} lg={3}>
+      <Col xs={12} md={6}>
         <Card>
           <Card.Header>
             <Card.Title>
