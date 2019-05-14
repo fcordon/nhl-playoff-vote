@@ -22,7 +22,7 @@ export default class UserVote extends Component {
         <Card>
           <Card.Header>
             <Card.Title>
-              {this.props.match < 1 ? <img className='nhl-logo' src={easternLogo} alt='NHL Logo' /> : <img className='nhl-logo' src={westernLogo} alt='NHL Logo' />}
+              {this.props.match < 1 ? <img className='nhl-logo' src={westernLogo} alt='NHL Logo' /> : <img className='nhl-logo' src={easternLogo} alt='NHL Logo' />}
               Finale de Conférence {this.props.match === 0 ? 'Est' : 'Ouest'}
             </Card.Title>
           </Card.Header>
