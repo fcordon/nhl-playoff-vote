@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Col, Table, Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import axios from 'axios'
 
 import { getAllClassement } from '../actions/ClassementAction'
 import { getSeries, getAllUserSeries } from '../actions/SeriesAction'
@@ -27,21 +28,48 @@ class Classement extends Component {
 
   componentDidMount() {
     this.state.userPseudo === 'C Fab' && this.setState({ isAdmin: true })
+
+    this.getUsersID().then(res => {
+      res.map(users => {
+        this.state.usersID.push(users.userID)
+        this.state.usersPoints.push(users.points)
+        return [this.state.usersID, this.state.usersPoints]
+      })
+      return res
+    })
+
+    this.getSeriesID().then(res => {
+      res.map(serie => {
+        this.state.series.push(serie._id)
+        return this.state.series
+      })
+      return res
+    })
+  }
+
+  getUsersID = async () => {
+    const callApi = await axios.get('/classement')
+    const response = await callApi.data
+
+    return response
+  }
+
+  getSeriesID = async () => {
+    const callApi = await axios.get('/series')
+    const response = await callApi.data
+
+    return response
   }
 
   getPoints() {
-    this.props.allClassement.map((classement, i) => {
-      this.state.usersID.push(classement.userID)
-      this.state.usersPoints.push(classement.points)
-      return [this.state.usersID, this.state.usersPoints]
-    })
-
-    this.props.series.map((serie, i) => this.state.series.push(serie._id))
-
     this.props.allUserSeries.map((vote, i) => {
       let userIndex = this.state.usersID.indexOf(vote.userID)
       let userPoints = this.state.usersPoints[userIndex]
       let seriesIndex = this.state.series.indexOf(vote.seriesId)
+
+      console.log('userIndex : ', userIndex)
+      console.log('userPoints : ', userPoints)
+      console.log('seriesIndex : ', seriesIndex)
 
       if(this.props.series[seriesIndex].winner === vote.winner && this.props.series[seriesIndex].diff === vote.diff) {
         const newArray = this.state.usersPoints
