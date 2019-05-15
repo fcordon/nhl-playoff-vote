@@ -67,30 +67,34 @@ class Classement extends Component {
       let userPoints = this.state.usersPoints[userIndex]
       let seriesIndex = this.state.series.indexOf(vote.seriesId)
 
-      console.log('userIndex : ', userIndex)
-      console.log('userPoints : ', userPoints)
-      console.log('seriesIndex : ', seriesIndex)
+      console.log('prev points : ', vote.userID + ' : ' + userPoints)
+
+      // console.log('series : ', this.props.series[seriesIndex])
+      // console.log('vote : ', vote)
+      // console.log('series winner : ', this.props.series[seriesIndex].winner)
+      // console.log('vote winner : ', vote.winner)
 
       if(this.props.series[seriesIndex].winner === vote.winner && this.props.series[seriesIndex].diff === vote.diff) {
-        const newArray = this.state.usersPoints
-        const newItem = userPoints + 3
-        newArray[userIndex] = newItem
-
-        this.setState({
-          usersPoints: newArray
-        })
+        userPoints += 3
       } else if(this.props.series[seriesIndex].winner === vote.winner) {
-        const newArray = this.state.usersPoints
-        const newItem = userPoints + 1
-        newArray[userIndex] = newItem
-
-        this.setState({
-          usersPoints: newArray
-        })
+        userPoints += 1
       }
 
-      this.props.updateClassement(vote.userID, {provisoire:userPoints})
+      const newArray = this.state.usersPoints
+      newArray[userIndex] = userPoints
+
+      this.setState({
+        usersPoints: newArray
+      })
+
+      console.log('next points : ', vote.userID + ' : ' + userPoints)
+
+
       return userPoints
+    })
+
+    this.state.usersID.map((user, i) => {
+      this.props.updateClassement(user, {provisoire:this.state.usersPoints[i]})
     })
   }
 
