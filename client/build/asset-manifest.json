@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/static/css/main.e4e86097.chunk.css",
-    "main.js": "/static/js/main.b4bba6b5.chunk.js",
-    "main.js.map": "/static/js/main.b4bba6b5.chunk.js.map",
+    "main.js": "/static/js/main.bd54c952.chunk.js",
+    "main.js.map": "/static/js/main.bd54c952.chunk.js.map",
     "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
     "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
     "static/js/2.e688e1fe.chunk.js": "/static/js/2.e688e1fe.chunk.js",
     "static/js/2.e688e1fe.chunk.js.map": "/static/js/2.e688e1fe.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.7f86e815323bb3c275310a5bc1d8c871.js": "/precache-manifest.7f86e815323bb3c275310a5bc1d8c871.js",
+    "precache-manifest.8c3799cfba63674a3e5cbfaa8bf23746.js": "/precache-manifest.8c3799cfba63674a3e5cbfaa8bf23746.js",
     "service-worker.js": "/service-worker.js",
     "static/css/main.e4e86097.chunk.css.map": "/static/css/main.e4e86097.chunk.css.map",
     "static/media/Eastern_Conference.png": "/static/media/Eastern_Conference.fdd85eae.png",
