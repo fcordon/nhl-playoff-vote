@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { Card, Row, Col } from 'react-bootstrap'
 
 // Components
-import easternLogo from '../images/Eastern_Conference.png'
-import westernLogo from '../images/Western_Conference.png'
+import stanleyCup from '../images/stanley_cup.png'
 
 export default class UserVote extends Component {
   render() {
@@ -18,12 +17,12 @@ export default class UserVote extends Component {
       )
     })
     return (
-      <Col xs={12} md={6}>
+      <Col xs={12} md={{ span:6, offset:3 }}>
         <Card>
           <Card.Header>
             <Card.Title>
-              {this.props.match < 1 ? <img className='nhl-logo' src={westernLogo} alt='NHL Logo' /> : <img className='nhl-logo' src={easternLogo} alt='NHL Logo' />}
-              Finale de Conférence {this.props.match === 0 ? 'Est' : 'Ouest'}
+              <img className='nhl-logo' src={stanleyCup} alt='Stanley Cup' />
+              Stanley Cup Final
             </Card.Title>
           </Card.Header>
           <Card.Body>

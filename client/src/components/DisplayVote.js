@@ -17,7 +17,7 @@ class DisplayVote extends Component {
     const usersVote = (this.props.allVote.map((votes, i) => {
       if (votes.userID === this.props.userID) {
         return (
-          <Col xs={12} md={6} key={i} className='align-center'>
+          <Col xs={12} key={i} className='align-center'>
             <p>
               <img src={votes.team1.img} alt={votes.team1.name} width='25%' /> &nbsp;&nbsp;
               <span className={votes.team1.score === 4 ? 'font-bold' : ''}>{votes.team1.score}</span>
