@@ -37,8 +37,8 @@ class AllVote extends Component {
 
   render() {
     return (
-      <Container id='all-votes' fluid>
-        <Col xs={12}>
+      <Container id='vote-form' fluid>
+        <Col xs={12} md={{ span:6, offset:3 }}>
           {this.state.isVoted ? this.props.classement.map((users, i) => <DisplayVote key={i} {...users}/>) : <p>Il faut que tu vote d'abord !</p>}
         </Col>
       </Container>

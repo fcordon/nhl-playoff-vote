@@ -95,6 +95,7 @@ class Classement extends Component {
 
     this.state.usersID.map((user, i) => {
       this.props.updateClassement(user, {provisoire:this.state.usersPoints[i]})
+      return this.state.usersPoints
     })
   }
 
