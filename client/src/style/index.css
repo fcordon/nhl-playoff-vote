@@ -196,4 +196,8 @@ ul li {
   .teams-logo {
     width: 15vw;
   }
+
+  .calendar .calendar-section-logo {
+    display: none;
+  }
 }
