@@ -14,13 +14,13 @@ const Main = () => (
   <main>
     <Switch>
       <Route exact path='/' component={Signin}/>
-      <Route exact path='/vote' component={Vote}/>
-      <Route exact path='/classement' component={Classement}/>
-      <Route exact path='/calendrier' component={Calendrier}/>
-      <Route exact path='/quiavotequoi' component={AllVote}/>
-      <Route exact path='/monCompte' component={MonCompte}/>
-      <Route exact path='/series' component={FormSeries}/>
-      <Route exact path='/updateseries' component={UpdateSeries}/>
+      <Route path='/vote' component={Vote}/>
+      <Route path='/classement' component={Classement}/>
+      <Route path='/calendrier' component={Calendrier}/>
+      <Route path='/quiavotequoi' component={AllVote}/>
+      <Route path='/monCompte' component={MonCompte}/>
+      <Route path='/series' component={FormSeries}/>
+      <Route path='/updateseries' component={UpdateSeries}/>
     </Switch>
   </main>
 )
