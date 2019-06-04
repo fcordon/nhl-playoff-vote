@@ -34,7 +34,6 @@ class Calendrier extends Component {
 
   render() {
     const getSchedule = this.state.schedule.length > 0 && this.state.schedule.map((schedule, i) => {
-      console.log('schedule : ', schedule.games[0])
       let months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre']
       let game = i + 1
       let teamLogoAway = 'https://www.nhl.com/site-core/images/team/logo/current/'+schedule.games[0].teams.away.team.id+'_dark.svg'
@@ -52,14 +51,15 @@ class Calendrier extends Component {
             <Col className='calendar-section-game'>
               <p>GAME</p>
             </Col>
-            <Col>
+            <Col className='calendar-section-logo'>
               <img src={teamLogoAway} alt={schedule.games[0].teams.away.team.name} />
             </Col>
             <Col>
               <p className='calendar-section-name'>{schedule.games[0].teams.away.team.name}</p>
             </Col>
             <Col>
-              <p className='calendar-section-win'>Wins : {schedule.games[0].teams.away.leagueRecord.wins} Losses : {schedule.games[0].teams.away.leagueRecord.losses}</p>
+              <p className='calendar-section-win'>Wins : {schedule.games[0].teams.away.leagueRecord.wins}</p>
+              <p>Losses : {schedule.games[0].teams.away.leagueRecord.losses}</p>
             </Col>
             <Col>
               <p className='calendar-section-score'>{schedule.games[0].teams.away.score}</p>
@@ -72,14 +72,15 @@ class Calendrier extends Component {
             <Col className='calendar-section-game'>
               <p><span className='calendar-section-game-number'>{game}</span></p>
             </Col>
-            <Col>
+            <Col className='calendar-section-logo'>
               <img src={teamLogoHome} alt={schedule.games[0].teams.home.team.name} />
             </Col>
             <Col>
               <p className='calendar-section-name'>{schedule.games[0].teams.home.team.name}</p>
             </Col>
             <Col>
-              <p className='calendar-section-win'>Wins : {schedule.games[0].teams.home.leagueRecord.wins} Losses : {schedule.games[0].teams.home.leagueRecord.losses}</p>
+              <p className='calendar-section-win'>Wins : {schedule.games[0].teams.home.leagueRecord.wins}</p>
+              <p>Losses : {schedule.games[0].teams.home.leagueRecord.losses}</p>
             </Col>
             <Col>
               <p className='calendar-section-score'>{schedule.games[0].teams.home.score}</p>
