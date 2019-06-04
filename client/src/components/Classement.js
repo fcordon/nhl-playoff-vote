@@ -17,6 +17,7 @@ class Classement extends Component {
     this.props.getAllUserSeries()
 
     this.state = {
+      keyState: 0,
       userPseudo: localStorage.getItem("userPseudo"),
       isAdmin: false,
       isLoading: false,
@@ -27,6 +28,14 @@ class Classement extends Component {
   }
 
   componentDidMount() {
+    if (window.performance) {
+      if (performance.navigation.type == 1) {
+        this.setState({keyState: this.state.keyState + 1})
+      } else {
+        alert( "This page is not reloaded");
+      }
+    }
+
     this.state.userPseudo === 'C Fab' && this.setState({ isAdmin: true })
 
     this.getUsersID().then(res => {
@@ -101,7 +110,7 @@ class Classement extends Component {
 
   render() {
     return (
-      <Col xs={12} md={{ span: 5, offset: 3 }} className='align-center'>
+      <Col xs={12} md={{ span: 5, offset: 3 }} className='align-center' key={this.state.keyState}>
         <Table striped bordered hover responsive>
           <thead>
             <tr>
