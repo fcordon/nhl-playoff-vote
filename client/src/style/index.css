@@ -122,6 +122,41 @@ ul li {
   font-size: 20px;
 }
 
+/* CALENDAR PAGE */
+.calendar .row {
+  align-items: center;
+}
+
+.calendar .calendar-section {
+  margin-bottom: 20px;
+  padding-top: 20px;
+  border-top: 1px solid grey;
+}
+
+.calendar .calendar-section:first-child {
+  border-top: none;
+}
+
+.calendar .calendar-section-game, .calendar .calendar-section-date {
+  color: grey;
+  font-size: 18px;
+}
+
+.calendar .calendar-section-game-number {
+  font-size: 2.5rem
+
+}
+
+.calendar .calendar-section-name {
+  color: grey;
+  font-size: 1rem;
+}
+
+.calendar .calendar-section-score {
+  color: grey;
+  font-size: 1.5rem;
+}
+
 /* Loader */
 .lds-ring {
   display: inline-block;
@@ -169,5 +204,9 @@ ul li {
 @media screen and (max-width: 812px) {
   .teams-logo {
     width: 15vw;
+  }
+
+  .calendar .calendar-section-logo {
+    display: none;
   }
 }
