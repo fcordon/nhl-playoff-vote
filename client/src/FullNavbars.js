@@ -43,8 +43,6 @@ class FullNavbars extends Component {
           <LinkContainer to={"/quiavotequoi"}>
             <Nav.Link eventKey={2}>Qui à voté quoi !</Nav.Link>
           </LinkContainer>
-        </Nav>
-        <Nav>
           {this.state.isAdmin &&
             <LinkContainer to={"/series"}>
               <Nav.Link eventKey={5}>Ajouter series</Nav.Link>
@@ -66,7 +64,7 @@ class FullNavbars extends Component {
       <Navbar bg="light" expand="lg">
         <Navbar.Brand className="navbar-brand">NHL vote app</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        {this.state.isAuthenticated ? authNav : null}
+        {this.state.isAuthenticated && authNav}
       </Navbar>
     )
   }
