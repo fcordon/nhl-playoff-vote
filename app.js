@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
-const url = 'mongodb+srv://Razza:CaptainElan2696@cluster0-zxexs.mongodb.net/nhl?retryWrites=true';
+const url = 'mongodb+srv://Razza:CaptainElan2696@cluster0-zxexs.mongodb.net/nhl?retryWrites=true&w=majority';
 
 async function main() {
   const client = mongoose.connect(url, { useNewUrlParser: true });
@@ -232,10 +232,10 @@ app.put('/classement/:_id', function(req, res) {
 
 // END API
 
+  // Handle React routing, return all requests to React app
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
   app.use(express.static(path.join(__dirname, 'client/build')));
-// Handle React routing, return all requests to React app
   app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   });
