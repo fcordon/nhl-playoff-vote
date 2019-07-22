@@ -1,5 +1,5 @@
 import React, { Component }  from 'react'
-import { Navbar, Nav } from 'react-bootstrap'
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -31,33 +31,39 @@ class FullNavbars extends Component {
     const authNav = (
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
+        <NavDropdown title="A toi de jouer" id="basic-nav-dropdown">
           <LinkContainer to={"/vote"}>
             <Nav.Link eventKey={0}>Vote !</Nav.Link>
           </LinkContainer>
+          <LinkContainer to={"/quiavotequoi"}>
+            <Nav.Link eventKey={1}>Qui à voté quoi !</Nav.Link>
+          </LinkContainer>
+          <NavDropdown.Divider />
+          <LinkContainer to={"/monCompte"}>
+            <Nav.Link eventKey={2}>Mon Compte</Nav.Link>
+          </LinkContainer>
+        </NavDropdown>
           <LinkContainer to={"/classement"}>
-            <Nav.Link eventKey={1}>Classement</Nav.Link>
+            <Nav.Link eventKey={3}>Classement</Nav.Link>
           </LinkContainer>
           <LinkContainer to={"/calendrier"}>
-            <Nav.Link eventKey={7}>Calendrier</Nav.Link>
+            <Nav.Link eventKey={4}>Calendrier</Nav.Link>
           </LinkContainer>
-          <LinkContainer to={"/quiavotequoi"}>
-            <Nav.Link eventKey={2}>Qui à voté quoi !</Nav.Link>
+          <LinkContainer to={"/draft"}>
+            <Nav.Link eventKey={5}>Draft</Nav.Link>
           </LinkContainer>
           {this.state.isAdmin &&
-            <LinkContainer to={"/series"}>
-              <Nav.Link eventKey={5}>Ajouter series</Nav.Link>
-            </LinkContainer>
+            <NavDropdown title="Admin" id="basic-nav-dropdown">
+              <LinkContainer to={"/series"}>
+                <Nav.Link eventKey={6}>Ajouter series</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to={"/updateseries"}>
+                <Nav.Link eventKey={7}>Update series</Nav.Link>
+              </LinkContainer>
+            </NavDropdown>
           }
-          {this.state.isAdmin &&
-            <LinkContainer to={"/updateseries"}>
-              <Nav.Link eventKey={6}>Update series</Nav.Link>
-            </LinkContainer>
-          }
-          <LinkContainer to={"/monCompte"}>
-            <Nav.Link eventKey={3}>Mon Compte</Nav.Link>
-          </LinkContainer>
-          <Nav.Link eventKey={4} onClick={this.onLogout.bind(this)}>Me déconnecter</Nav.Link>
         </Nav>
+        <Nav.Link eventKey={4} onClick={this.onLogout.bind(this)}>Me déconnecter</Nav.Link>
       </Navbar.Collapse>
     )
     return (

@@ -5,6 +5,7 @@ import Signin from "./components/Signin"
 import Vote from "./components/Vote"
 import Classement from "./components/Classement"
 import Calendrier from "./components/Calendrier"
+import Draft from "./components/Draft"
 import AllVote from "./components/AllVote"
 import MonCompte from "./components/MonCompte"
 import FormSeries from "./components/FormSeries"
@@ -17,6 +18,7 @@ const Main = () => (
       <Route path='/vote' component={Vote}/>
       <Route path='/classement' component={Classement}/>
       <Route path='/calendrier' component={Calendrier}/>
+      <Route path='/draft' component={Draft}/>
       <Route path='/quiavotequoi' component={AllVote}/>
       <Route path='/monCompte' component={MonCompte}/>
       <Route path='/series' component={FormSeries}/>

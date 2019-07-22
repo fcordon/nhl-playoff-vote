@@ -12,20 +12,21 @@ class Calendrier extends Component {
   }
 
   componentDidMount() {
-    this.getUsersID()
+    let date = new Date()
+    let day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
+    let getMonth = date.getMonth()
+    let realMonth = getMonth + 1
+    let month = realMonth < 10 ? '0' + realMonth : realMonth
+    let year = date.getFullYear()
+    let startDate = year + '-' + month + '-' + day
+    let endDate = year + '-' + month + '-31'
+    
+    this.getSchedule(startDate, endDate)
     .then(res => this.setState({ schedule: res.dates }))
     .catch(err => console.log(err))
   }
 
-  getUsersID = async () => {
-    // let date = new Date()
-    // let day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
-    // let getMonth = date.getMonth()
-    // let realMonth = getMonth + 1
-    // let month = realMonth < 10 ? '0' + realMonth : realMonth
-    // let year = date.getFullYear()
-    // let fullDate = year + '-' + month + '-' + day
-
+  getSchedule = async (startDate, endDate) => {
     const callApi = await axios.get('https://statsapi.web.nhl.com/api/v1/schedule?startDate=2019-05-27&endDate=2019-07-01')
     const response = await callApi.data
 
@@ -46,7 +47,7 @@ class Calendrier extends Component {
       let gameDate = gameDateDay + ' ' + gameDateMonth + ' ' + gameDateYear
 
       return (
-        <div className='calendar-section' key={i}>
+        <section className='calendar-section' key={i}>
           <Row>
             <Col className='calendar-section-game'>
               <p>GAME</p>
@@ -88,7 +89,7 @@ class Calendrier extends Component {
             <Col>
             </Col>
           </Row>
-        </div>
+        </section>
       )
     })
     return (
